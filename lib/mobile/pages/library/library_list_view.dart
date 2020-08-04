@@ -40,9 +40,10 @@ class LibraryListView extends StatelessWidget {
                   ],
                 ),
                 Divider(),
-                ...appState.libBooks.map((e) => Padding(
+                //...appState.libBooks
+                ...books.map((e) => Padding(
                           padding: EdgeInsets.symmetric(vertical: 8.0),
-                          child: BookTile(size: bookSize, book: e),
+                          child: BookTile(size: bookSize, book2: e),
                         ))
                     .toList(),
                 Row(
