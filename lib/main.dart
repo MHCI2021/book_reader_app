@@ -32,11 +32,10 @@ class MyApp extends StatelessWidget {
         observer
       ],
       debugShowCheckedModeBanner: false,
-      home: (Platform.isIOS || Platform.isAndroid)?LibraryListView()
-      : LibraryScrollView(),
+      home: //(Platform.isIOS || Platform.isAndroid)?LibraryListView(): 
+      LibraryListView(),
     );
   }
 }
-
 
 
