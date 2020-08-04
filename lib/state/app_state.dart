@@ -6,9 +6,7 @@ import 'package:scroll_book/utils/fonts.dart';
 enum Overlays {
   BookOptions,
   ScrollSpeed,
-
 }
-
 
 
 class AppState extends ChangeNotifier {
