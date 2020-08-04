@@ -30,8 +30,6 @@ class _TextScrollWidgetState extends State<TextScrollWidget>
   @override
   void initState() {
     super.initState();
-
-
     appState = locator<AppState>();
      blocks =test.replaceAll("\n", "").split("&&");
       _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
@@ -41,8 +39,6 @@ class _TextScrollWidgetState extends State<TextScrollWidget>
                 print(currentBlock);
               });
           });
-    
-
   }
 
   scroll() async {

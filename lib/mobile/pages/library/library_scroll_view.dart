@@ -1,93 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_book/mobile/menu_bars/bottom_bar.dart';
 import 'package:scroll_book/mobile/menu_bars/menu_button.dart';
+import 'package:scroll_book/mobile/shared_components/gradient_container.dart';
 import 'package:scroll_book/mobile/shared_components/percent_indicator.dart';
 import 'package:scroll_book/models/sample_data/ruined_by_design.dart';
 import 'package:scroll_book/state/app_state.dart';
 import 'package:scroll_book/mobile/route_transitions.dart';
 import 'package:scroll_book/state/service_locator.dart';
 
-
-//rgb(243, 236, 218) top left
-//rgb(235, 121, 120) bottom corner
 class LibraryScrollView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var appState= locator<AppState>();
+    var appState = locator<AppState>();
     Size s = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(children: [
-        Container(
-          width: double.infinity,
+        GradientContainer(
           height: s.height * 0.45,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                Color.fromRGBO(243, 236, 218, 1.0),
-                Color.fromRGBO(235, 121, 120, 1.0),
-              ])),
+          begin: GradientInfo(
+              color: Color.fromRGBO(243, 236, 218, 1.0),
+              alignment: Alignment.topLeft),
+          end: GradientInfo(
+            color: Color.fromRGBO(235, 121, 120, 1.0),
+            alignment: Alignment.bottomRight,
+          ),
         ),
         TopMenuBar(),
         Positioned(
             left: 0.0,
-            top: s.height *0.1,
+            top: s.height * 0.1,
             height: s.height * 0.9,
             width: s.width,
             child: Container(
               child: Column(children: [
                 Container(
-            width: s.width / 2,
-            height: 1.5 * s.width / 2,
-            child: Image.network(
-              appState.currentBook.imageUrl,
-              fit: BoxFit.fill,
-            ),
-          ),
-          SizedBox(height: 10),
+                  width: s.width / 2,
+                  height: 1.5 * s.width / 2,
+                  child: Image.network(
+                    appState.currentBook.imageUrl,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                SizedBox(height: 10),
                 Text(appState.currentBook.title,
                     style: Theme.of(context).textTheme.headline2),
                 SizedBox(height: 10),
-                Text(appState.currentBook.author,
-                  ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("   "),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Container(
-                        width: 150,
-                        height: 50,
-                        child: CustomPaint(
-                          painter: LinearPainter(
-                              progress: 0.25,
-                              //appState.currentBook.savedProgress,
-                              progressColor: Colors.black,
-                              backgroundColor: Colors.grey[300],
-                              strokeWidth: 8),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(progToPcnt(0.25
-                     //   appState.currentBook.savedProgress
-                        ))
-                    ],
-                  ),
+                Text(
+                  appState.currentBook.author,
                 ),
+                ProgressBar(progress: 0.25,),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.0),
                   child: Container(
                       height: s.height * 0.25,
                       child: Text(
-                       ruinedByD,
-                      //  appState.currentBook.previewText,
+                        ruinedByD,
+                        //  appState.currentBook.previewText,
                         overflow: TextOverflow.clip,
                         style: Theme.of(context).textTheme.bodyText1,
                       )),
@@ -96,14 +64,12 @@ class LibraryScrollView extends StatelessWidget {
             )),
         BottomBar(
           children: [
-              GestureDetector(
-                onTap: (){
+            GestureDetector(
+                onTap: () {
                   Navigator.of(context).push(homeToReaderRoute());
                 },
-                child: 
-                Image.asset("assets/icons/play.png")
-                ),
-            ],
+                child: Image.asset("assets/icons/play.png")),
+          ],
         ),
       ]),
     );
@@ -126,9 +92,11 @@ class TopMenuBar extends StatelessWidget {
             //mainAxisAlignment: MainAxisAlignment.start,
             children: [
               MenuButton(
-                h:70, w:70,
+                h: 70,
+                w: 70,
                 asset: "back",
-                onPressed: ()=>Navigator.of(context).push(previewToLibRoute()),
+                onPressed: () =>
+                    Navigator.of(context).push(previewToLibRoute()),
               ),
               Expanded(child: SizedBox()),
               Image.asset("assets/icons/bookshelf.png"),
@@ -140,26 +108,19 @@ class TopMenuBar extends StatelessWidget {
   }
 }
 
-String progToPcnt(double prog)=>"${(prog*100).toStringAsFixed(0)}%";
 
-
-        // CenterAbout(
-        //   position: Offset(s.width / 2, s.height * 0.35),
-        //   child: Container(
-        //     width: s.width / 2,
-        //     height: 1.5 * s.width / 2,
-        //     child: Image.network(
-        //       appState.currentBook.imageUrl,
-        //      // "assets/images/ruined.jpg",
-        //       fit: BoxFit.fill,
-        //     ),
-        //   ),
-        // ),
-
-
-
-
-
+// CenterAbout(
+//   position: Offset(s.width / 2, s.height * 0.35),
+//   child: Container(
+//     width: s.width / 2,
+//     height: 1.5 * s.width / 2,
+//     child: Image.network(
+//       appState.currentBook.imageUrl,
+//      // "assets/images/ruined.jpg",
+//       fit: BoxFit.fill,
+//     ),
+//   ),
+// ),
 
 // import 'package:flutter/material.dart';
 // import 'package:scroll_book/models/book.dart';
@@ -180,7 +141,7 @@ String progToPcnt(double prog)=>"${(prog*100).toStringAsFixed(0)}%";
 //              children: books.map((e) => Padding(
 //                padding: EdgeInsets.all(s.width/18),
 //                child: BookTile(size: bookSize, book:e),
-//              )).toList(),  
+//              )).toList(),
 //             ),
 //         ),
 //       ),);
@@ -224,9 +185,8 @@ String progToPcnt(double prog)=>"${(prog*100).toStringAsFixed(0)}%";
 //                   Text(book.author,style: TextStyle(fontSize:12),
 //                    // "Mike Montero"
 //                     ),
-           
+
 //                 ]),
 //     );
 //   }
 // }
-
