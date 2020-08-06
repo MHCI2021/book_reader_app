@@ -10,7 +10,7 @@ enum Dir {LEFT, RIGHT, TOP, BOTTOM}
 enum AnimType {MoveIn, MoveOut, Push, SlideIn, SlideOut}
 
 
-Route createRoute({Widget newScreen, Dir directionIn, AnimType animType}){
+Route createRoute({@required Widget newScreen, Dir directionIn=Dir.LEFT, AnimType animType= AnimType.MoveIn}){
 return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => newScreen,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {

@@ -3,6 +3,7 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_book/mobile/pages/library/library_list_view.dart';
 import 'package:scroll_book/mobile/pages/library/library_scroll_view.dart';
+import 'package:scroll_book/mobile/pages/login_pages/login_page.dart';
 import 'package:scroll_book/state/service_locator.dart';
 import 'package:scroll_book/state/state.dart';
 import 'package:scroll_book/utils/theme.dart';
@@ -32,8 +33,9 @@ class MyApp extends StatelessWidget {
         observer
       ],
       debugShowCheckedModeBanner: false,
-      home: //(Platform.isIOS || Platform.isAndroid)?LibraryListView(): 
-      LibraryListView(),
+      home:LoginPage()
+       //(Platform.isIOS || Platform.isAndroid)?LibraryListView(): 
+      //LibraryListView(),
     );
   }
 }
