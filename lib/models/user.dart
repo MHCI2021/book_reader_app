@@ -40,7 +40,9 @@ class LibraryBook {
   final double progress;
   final int wordCount;
   final String chapterText;
- // final List<Bookmark> notes;
+  final int chapterSentenceNum;
+  final int chapterNum;
+  final List<Bookmark> bookmarks;
 
   LibraryBook({
     this.bookID, 
@@ -51,7 +53,10 @@ class LibraryBook {
     this.progress, 
     this.imageUrl,
     this.wordCount,
-    this.chapterText, 
+    this.chapterText,
+    this.bookmarks,
+    this.chapterNum,
+    this.chapterSentenceNum, 
  //   this.notes
     });
 
@@ -64,7 +69,11 @@ class LibraryBook {
     this.isStarted= safe("isStarted", map), 
     this.wordCount = safe("words", map),
     this.progress= safe("progress", map),
-    this.chapterText = safe("chapterText", map);
+    this.chapterText = safe("chapterText", map),
+    this.chapterSentenceNum= safe("chapterSentenceNum", map),
+    this.chapterNum = safe("chapterNum", map),
+    this.bookmarks = safeGet(key:"library", map:map, alt: []).map<LibraryBook>((b)=>LibraryBook.fromFirebase(b)).toList();
+    
    // this.notes = safe("bookmarks", map)?.map<Bookmark>((b)=>Bookmark.fromFirebase(b));
 
 }

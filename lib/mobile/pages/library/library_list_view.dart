@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_book/mobile/pages/library/book_tile.dart';
-import 'package:scroll_book/models/book.dart';
-import 'package:scroll_book/models/models.dart';
+// import 'package:scroll_book/models/book.dart';
+// import 'package:scroll_book/models/models.dart';
 import 'package:scroll_book/state/state.dart';
 
 import 'package:scroll_book/utils/custom_expansion_tile.dart' as custom;
@@ -18,8 +18,7 @@ class LibraryListView extends StatelessWidget {
     final TextStyle headerFont = Theme.of(context).textTheme.headline2;
     final TextStyle subHeaderFont = Theme.of(context).textTheme.headline3;
     var appState= locator<AppState>();
-    final List<LibraryBook> inProgressBooks=[];
-    final List<LibraryBook> inUnstartedBooks=[];
+    
     final Size bookSize = Size(100, s.width - 60.0);
 
     return Scaffold(
@@ -36,9 +35,9 @@ class LibraryListView extends StatelessWidget {
             title: Text("In Progress",style: subHeaderFont,),
             trailing: SizedBox(),
             initiallyExpanded: true,
-            children: books.map((e) => Padding(
+            children: appState.getInProgressBooks().map((e) => Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: BookListTile(size: bookSize, book2: e),
+                      child: BookListTile(size: bookSize, book: e),
                     ))
                 .toList(),
           ),
@@ -47,9 +46,9 @@ class LibraryListView extends StatelessWidget {
             title: Text("In Progress",style: subHeaderFont,),
             trailing: SizedBox(),
             initiallyExpanded: true,
-            children: books.map((e) => Padding(
+            children:  appState.getToStartBooks().map((e) => Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: BookListTile(size: bookSize, book2: e),
+                      child: BookListTile(size: bookSize, book: e),
                     ))
                 .toList(),
           ),
@@ -61,7 +60,8 @@ class LibraryListView extends StatelessWidget {
   }
 }
 
-
+// final List<LibraryBook> inProgressBooks=[];
+    // final List<LibraryBook> inUnstartedBooks=[];
  // Row(children: [
             //   Expanded(
             //       child: ),
