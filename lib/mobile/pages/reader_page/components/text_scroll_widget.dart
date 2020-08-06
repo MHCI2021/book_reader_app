@@ -17,6 +17,8 @@ class TextScrollWidget extends StatefulWidget {
 
 class _TextScrollWidgetState extends State<TextScrollWidget>
     with TickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> animation;
   double startScroll = 0, speed = 80, currentScroll = 0;
   int currentBlock = 0, blocksPer500px = 20;
   List<String> blocks = [];
@@ -31,25 +33,49 @@ class _TextScrollWidgetState extends State<TextScrollWidget>
   void initState() {
     super.initState();
     appState = locator<AppState>();
-     blocks =appState.getTextBlocks();
-     currentBlock = appState.currentBook.chapterSentenceNum;
-     test.replaceAll("\n", "").split("&&");
-      _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
-        if (currentBlock < blocks.length-1 && appState.isPlaying)
-              setState(() {
-                currentBlock += 1;
-                print(currentBlock);
-              });
-          });
+    blocks = appState.getTextBlocks();
+ 
+    currentBlock = appState.currentBook.chapterSentenceNum;
+    //test.replaceAll("\n", "").split("&&");
+
+    _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      if (currentBlock < blocks.length - 1 && appState.isPlaying)
+        setState(() {
+          currentBlock += 1;
+          print(currentBlock);
+        });
+    });
+    controller= AnimationController(duration: widget.animationDuration, vsync: this);
+    
+    animation = Tween<double>(begin: 0, end: 1).animate(
+      controller,
+    )..addListener(() {
+         setState(() {
+           //currentScroll=animation.value*speed+startScroll;
+           });
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          startScroll += speed;
+          controller.forward(from: 0.0);
+        }
+      });
+    appState.addListener(() {
+      if(appState.isPlaying!=isPlaying){
+        isPlaying=appState.isPlaying;
+        if(isPlaying)controller.forward();
+        else controller.stop();
+      }
+    });
   }
 
+//while (true) {
   scroll() async {
     if (_scrollController.hasClients) {
-      if (currentBlock < blocks.length && appState.isPlaying )
-        await _scrollController.animateTo(_scrollController.offset + 100,
-            duration: widget.animationDuration, curve: Curves.linear);
+      _scrollController.jumpTo(animation.value * speed + startScroll);
     }
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -73,17 +99,23 @@ class _TextScrollWidgetState extends State<TextScrollWidget>
       ),
     );
   }
+
   String padTop(String text, int lines) => "\n" * lines + text;
 }
 
-
-
+// scroll() async {
+//   if (_scrollController.hasClients) {
+//     if (currentBlock < blocks.length && appState.isPlaying )
+//       await _scrollController.animateTo(_scrollController.offset + 100,
+//           duration: widget.animationDuration, curve: Curves.linear);
+//   }
+// }
 
 // appState.addListener(() {
 //       if (appState.isPlaying != isPlaying) {
 //         isPlaying = appState.isPlaying;
 //         if (isPlaying)
-        
+
 //         else  _timer.cancel();}
 //     });
 

@@ -46,7 +46,7 @@ class AppState extends ChangeNotifier {
   List<LibraryBook> getInProgressBooks()=>c.library.where((element) => element.isStarted).toList()??[];
   List<LibraryBook> getToStartBooks() =>c.library.where((element) => !element.isStarted).toList()??[];
   setBook(LibraryBook _newBook)=>_currentBook=_newBook;
-  getTextBlocks()=>_currentBook.chapterText.split(". ");
+  getTextBlocks()=>_currentBook.chapterText.replaceAll(".", ".&&").split("&&").map((e) => e.trim()+" ").toList();
   
 }
 
