@@ -10,6 +10,7 @@ class BookModel {
   final String author;
   final String previewText;
   final String imageUrl;
+  final Color color1, color2;
   final int wordCount;
   final List<ChapterModel> chapters;
   
@@ -20,6 +21,8 @@ class BookModel {
     this.imageUrl,
     this.wordCount,
     this.previewText,
+    this.color1,
+    this.color2,
     this.id
     });
     BookModel.fromFirebase(String id, Map<String, dynamic> map):
@@ -27,6 +30,8 @@ class BookModel {
       this.title= safe("title", map), 
       this.author=safe("author", map), 
       this.imageUrl= safe("imageUrl", map), 
+      this.color1 = safe("color1", map), 
+      this.color2 = safe("color2", map), //dd
       this.wordCount= safe("profilePic", map),
       this.previewText= safe('previewText', map)??ruinedByD,
       this.chapters = safe("chapters", map)?.map<ChapterModel>((b)=>ChapterModel.fromFirebase(b));

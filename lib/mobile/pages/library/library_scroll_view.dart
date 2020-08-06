@@ -54,8 +54,8 @@ class LibraryScrollView extends StatelessWidget {
                   child: Container(
                       height: s.height * 0.25,
                       child: Text(
-                        ruinedByD,
-                        //  appState.currentBook.previewText,
+                        appState.currentBook.chapterText,
+                    
                         overflow: TextOverflow.clip,
                         style: Theme.of(context).textTheme.bodyText1,
                       )),
@@ -108,7 +108,8 @@ class TopMenuBar extends StatelessWidget {
   }
 }
 
-
+ //  ruinedByD,
+                        //  appState.currentBook.previewText,
 // CenterAbout(
 //   position: Offset(s.width / 2, s.height * 0.35),
 //   child: Container(

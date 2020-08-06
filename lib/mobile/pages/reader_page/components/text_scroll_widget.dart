@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:scroll_book/mobile/pages/reader_page/block_highlight_widget.dart';
+import 'package:scroll_book/mobile/pages/reader_page/components/block_highlight_widget.dart';
 import 'package:scroll_book/state/app_state.dart';
 import 'package:scroll_book/state/state.dart';
 
@@ -31,7 +31,9 @@ class _TextScrollWidgetState extends State<TextScrollWidget>
   void initState() {
     super.initState();
     appState = locator<AppState>();
-     blocks =test.replaceAll("\n", "").split("&&");
+     blocks =appState.getTextBlocks();
+     currentBlock = appState.currentBook.chapterSentenceNum;
+     test.replaceAll("\n", "").split("&&");
       _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
         if (currentBlock < blocks.length-1 && appState.isPlaying)
               setState(() {
@@ -48,7 +50,6 @@ class _TextScrollWidgetState extends State<TextScrollWidget>
             duration: widget.animationDuration, curve: Curves.linear);
     }
   }
-
   @override
   void dispose() {
     super.dispose();
