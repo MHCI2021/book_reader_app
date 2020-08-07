@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:scroll_book/mobile/pages/reader_page/components/crousel_test.dart';
 import 'package:scroll_book/mobile/pages/reader_page/components/text_scroll_widget.dart';
 import 'package:scroll_book/mobile/menu_bars/bottom_bar.dart';
 import 'package:scroll_book/mobile/menu_bars/menu_button.dart';
+import 'package:scroll_book/mobile/pages/reader_page/components/text_swipe_widget.dart';
 import 'package:scroll_book/state/state.dart';
 import 'components/top_menu_bar.dart';
 
+
+enum TestVersion {
+  Highlight,
+  Carousel,
+  Roledex,
+  Swipe,
+  Dot
+}
 class ReaderPage extends StatefulWidget {
   @override
   _ReaderPageState createState() => _ReaderPageState();
@@ -13,13 +23,18 @@ class ReaderPage extends StatefulWidget {
 class _ReaderPageState extends State<ReaderPage> {
   bool playing = true;
   bool isSpeedShown = false, isFontMenuShown = false;
+  TestVersion v = TestVersion.Swipe;
+
 
   @override
   Widget build(BuildContext context) {
     var appState = locator<AppState>();
     return Scaffold(
       body: Stack(children: [
-        TextScrollWidget(),
+        //TextScrollWidget(),
+        getVersion(),
+        //TextSwipeWidget(),
+        
         TopMenuBar(),
         BottomBar(
           children: [
@@ -62,6 +77,18 @@ class _ReaderPageState extends State<ReaderPage> {
     );
   }
 
+Widget getVersion(){
+  switch (v) {
+    case TestVersion.Carousel:
+      return VerticalSliderDemo();
+      break;
+    case TestVersion.Swipe:
+      return TextSwipeWidget();
+      break;
+    default: 
+      return TextScrollWidget();
+  }
+}
 
   Widget _speedMenu()=> Positioned(
             bottom: 80.0,
