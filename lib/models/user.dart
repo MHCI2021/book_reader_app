@@ -40,8 +40,10 @@ class LibraryBook {
   final double progress;
   final int wordCount;
   final String chapterText;
+  final Color color1, color2;
   final int chapterSentenceNum;
   final int chapterNum;
+  
   final List<Bookmark> bookmarks;
 
   LibraryBook({
@@ -49,6 +51,8 @@ class LibraryBook {
     this.title, 
     this.author, 
     this.isDone,
+    this.color1,
+    this.color2,
     this.isStarted, 
     this.progress, 
     this.imageUrl,
@@ -67,6 +71,8 @@ class LibraryBook {
     this.imageUrl=safe("imageUrl", map), 
     this.isDone= safe("isDone", map), 
     this.isStarted= safe("isStarted", map), 
+    this.color1=Colors.white,
+    this.color2=Colors.white,
     this.wordCount = safe("words", map),
     this.progress= safe("progress", map),
     this.chapterText = safe("chapterText", map),

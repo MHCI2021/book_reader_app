@@ -18,10 +18,10 @@ class LibraryScrollView extends StatelessWidget {
         GradientContainer(
           height: s.height * 0.45,
           begin: GradientInfo(
-              color: Color.fromRGBO(243, 236, 218, 1.0),
+              color:appState.currentBook.color1,
               alignment: Alignment.topLeft),
           end: GradientInfo(
-            color: Color.fromRGBO(235, 121, 120, 1.0),
+            color: appState.currentBook.color2,
             alignment: Alignment.bottomRight,
           ),
         ),

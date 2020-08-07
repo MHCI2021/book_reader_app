@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scroll_book/models/book.dart';
 import 'package:scroll_book/models/user.dart';
 import 'package:scroll_book/utils/fonts.dart';
+// /https://blog.codemagic.io/deploying-flutter-app-to-firebase-app-distribution-using-fastlane/
 enum Overlays {
   BookOptions,
   ScrollSpeed,
@@ -61,6 +62,8 @@ UserModel c = UserModel(
       title: "How Buildings Learn",
       author: "Stewart Brand",
       imageUrl: "https://img1.od-cdn.com/ImageType-400/1523-1/1FA/701/FE/%7B1FA701FE-EC71-4D4E-805D-04F4CCA4E23E%7DImg400.jpg",
+      color1: Color.fromRGBO(253, 255, 239,1.0),
+      color2: Color.fromRGBO(178, 196, 245,1.0),
       isDone: false,
       isStarted: true,
       progress: 0.3,
@@ -78,6 +81,8 @@ UserModel c = UserModel(
       imageUrl: "https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
       isDone: false,
       isStarted: true,
+      color1: Color.fromRGBO(243, 236, 218,1.0),
+      color2: Color.fromRGBO(255, 163, 169,1.0),
       progress: 0.5,
       wordCount: 45040,// todo
       chapterNum: 1,
@@ -96,6 +101,8 @@ UserModel c = UserModel(
       isStarted: false,
       progress: 0.3,
       wordCount: 45040,// todo
+      color1: Color.fromRGBO(255, 255, 223,1.0),
+      color2: Color.fromRGBO(158, 223, 236,1.0),
       chapterNum: 4,
       chapterSentenceNum: 5,
       chapterText: sprint,
@@ -109,6 +116,8 @@ UserModel c = UserModel(
       imageUrl: "https://www.porchlightbooks.com/globalassets/book-covers/9780804176989.jpg?w=1000&scale=both&mode=crop&u=637045000342670000",
       isDone: false,
       isStarted: false,
+      color1: Color.fromRGBO(244, 225, 198,1.0),
+      color2: Color.fromRGBO(187, 187, 187,1.0),
       progress: 0.3,
       wordCount: 45040,// todo
       chapterNum: 4,
