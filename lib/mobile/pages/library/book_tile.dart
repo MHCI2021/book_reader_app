@@ -74,7 +74,7 @@ class _BookListTileState extends State<BookListTile> {
                   ),
                   SizedBox(height: 5),
                   Text(//"25%",
-                  progToPcnt(widget.book.progress),
+                  progToPcnt(b.progress),
                     style: TextStyle(fontSize: 12),
                   ),
                 ],

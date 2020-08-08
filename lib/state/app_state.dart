@@ -64,6 +64,8 @@ UserModel c = UserModel(
             author: "Stewart Brand",
             imageUrl: "https://img1.od-cdn.com/ImageType-400/1523-1/1FA/701/FE/%7B1FA701FE-EC71-4D4E-805D-04F4CCA4E23E%7DImg400.jpg",
             previewText: learnPreview,
+            color1: Color.fromRGBO(253, 255, 239,1.0),
+            color2: Color.fromRGBO(178, 196, 245,1.0),
       ),
       isDone: false,
       isStarted: true,
@@ -80,6 +82,8 @@ UserModel c = UserModel(
       author: "Mike Montero",
       imageUrl: "https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
       previewText: designerPreview,
+      color1: Color.fromRGBO(243, 236, 218,1.0),
+            color2: Color.fromRGBO(255, 163, 169,1.0),
      ) ,
       isDone: false,
       isStarted: true,
@@ -99,6 +103,7 @@ UserModel c = UserModel(
             imageUrl: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447560400l/27831864._SY475_.jpg",
             color1: Color.fromRGBO(255, 255, 223,1.0),
             color2: Color.fromRGBO(158, 223, 236,1.0),
+            previewText: sprintPreview,
             wordCount: 45040,// todo
         ),
       isDone: false,
@@ -117,9 +122,12 @@ UserModel c = UserModel(
           author: "Daniel Coyle",
           imageUrl: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fwww.porchlightbooks.com%2Fglobalassets%2Fbook-covers%2F9780804176989.jpg%3Fw%3D1000%26scale%3Dboth%26mode%3Dcrop%26u%3D637045000342670000",
           previewText: cultureCodePreview,
+          color1: Color.fromRGBO(255, 163, 169,1.0),
+            color2: Color.fromRGBO(187, 187, 187,1.0),
             ),
         isDone: false,
         isStarted: false,
+         progress: 0.3,
         chapterNum: 4,
         chapterSentenceNum: 5,
         chapterText: sprint,
@@ -138,6 +146,8 @@ List<BookModel> storeBooks = [
       author: "Mike Montero",
       imageUrl: "https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
       previewText: designerPreview,
+      color1: Color.fromRGBO(255, 255, 223,1.0),
+            color2: Color.fromRGBO(158, 223, 236,1.0),
      ) ),
   BookModel(
     id: "sprint",
@@ -146,6 +156,8 @@ List<BookModel> storeBooks = [
     author: "Jake Knapp",
     imageUrl: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447560400l/27831864._SY475_.jpg",
     previewText: sprintPreview,
+    color1: Color.fromRGBO(255, 255, 223,1.0),
+            color2: Color.fromRGBO(158, 223, 236,1.0),
    ) ),
   BookModel(
     id:"learn",
@@ -154,6 +166,8 @@ List<BookModel> storeBooks = [
     author: "Stewart Brand",
     imageUrl: "https://img1.od-cdn.com/ImageType-400/1523-1/1FA/701/FE/%7B1FA701FE-EC71-4D4E-805D-04F4CCA4E23E%7DImg400.jpg",
     previewText: learnPreview,
+    color1: Color.fromRGBO(255, 255, 223,1.0),
+            color2: Color.fromRGBO(158, 223, 236,1.0),
       )
      ),
     BookModel(
@@ -163,6 +177,8 @@ List<BookModel> storeBooks = [
       author: "Author",
       imageUrl: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F41DWwvA3XOL.jpg",
       previewText: blindspotPreview,
+      color1: Color.fromRGBO(255, 255, 223,1.0),
+            color2: Color.fromRGBO(158, 223, 236,1.0),
       )  ),
     BookModel(
       id:"culture",
@@ -171,6 +187,8 @@ List<BookModel> storeBooks = [
       author: "Daniel Coyle",
       imageUrl: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fwww.porchlightbooks.com%2Fglobalassets%2Fbook-covers%2F9780804176989.jpg%3Fw%3D1000%26scale%3Dboth%26mode%3Dcrop%26u%3D637045000342670000",
       previewText: cultureCodePreview,
+      color1: Color.fromRGBO(255, 255, 223,1.0),
+            color2: Color.fromRGBO(158, 223, 236,1.0),
         )
     ),
 
