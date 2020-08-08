@@ -5,6 +5,7 @@ import 'package:scroll_book/mobile/menu_bars/bottom_bar.dart';
 import 'package:scroll_book/mobile/menu_bars/menu_button.dart';
 import 'package:scroll_book/mobile/pages/reader_page/components/text_swipe_widget.dart';
 import 'package:scroll_book/state/state.dart';
+import 'package:scroll_book/utils/fonts.dart';
 import 'components/top_menu_bar.dart';
 
 
@@ -23,7 +24,7 @@ class ReaderPage extends StatefulWidget {
 class _ReaderPageState extends State<ReaderPage> {
   bool playing = true;
   bool isSpeedShown = false, isFontMenuShown = false;
-  TestVersion v = TestVersion.Swipe;
+  TestVersion v = TestVersion.Carousel;
 
 
   @override
@@ -72,7 +73,47 @@ class _ReaderPageState extends State<ReaderPage> {
             )
           ],
         ),
-       isSpeedShown?_speedMenu():SizedBox()
+       isSpeedShown?_speedMenu():SizedBox(),
+
+        Align(
+  alignment: Alignment.bottomCenter,
+  child:   Padding(
+    padding:EdgeInsets.only(bottom:100.0),
+    child: Container(height: 70, color: Colors.grey[300].withOpacity(0.9),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children:[
+        SizedBox(width:15),
+         new DropdownButton<String>(
+    items: getGoogleFonts.keys.map((String value) {
+      return new DropdownMenuItem<String>(
+        value: value,
+        child: new Text(value),
+      );
+    }).toList(),
+    value: appState.fontFam,
+    onChanged: (val) {
+      setState(() {
+        appState.fontFam= val;
+      });
+    }
+    ),
+    Center(child: IconButton(icon: Icon(Icons.minimize), onPressed: (){
+     if(appState.fontSize>8){
+       setState(() {
+         appState.fontSize-=1;
+    });
+     }
+
+    })),
+  IconButton(icon: Icon(Icons.add), onPressed: (){
+    setState(() {
+      appState.fontSize+=1;
+    });
+  }),
+  
+      ])),
+  )),
       ]),
     );
   }

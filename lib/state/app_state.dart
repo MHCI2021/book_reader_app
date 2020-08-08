@@ -48,7 +48,7 @@ class AppState extends ChangeNotifier {
   List<LibraryBook> getToStartBooks() =>c.library.where((element) => !element.isStarted).toList()??[];
   setBook(LibraryBook _newBook)=>_currentBook=_newBook;
   getTextBlocks()=>_currentBook.chapterText.replaceAll(".", ".&&").split("&&").map((e) => e.trim()+" ").toList();
-  
+  getFontStyle()=>getGoogleFonts[fontFam](TextStyle(color: Colors.black, fontSize: fontSize));
 }
 
 UserModel c = UserModel(

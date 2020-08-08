@@ -28,3 +28,5 @@ dynamic checkPath(var map, List path){
 
 String progToPcnt(double prog)=>"${(prog*100).toStringAsFixed(0)}%";
 
+bool isNull(dynamic v)=>v==null;
+bool notNull(dynamic v)=>v!=null;
