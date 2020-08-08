@@ -33,7 +33,8 @@ class _BookListTileState extends State<BookListTile> {
  
   @override
   Widget build(BuildContext context) {
-    dynamic book = widget.book??widget.book2;
+     dynamic b = widget.book??widget.book2;
+   BookInfo bookInfo=b.bookInfo;
     return Stack(
       children: [
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -47,7 +48,7 @@ class _BookListTileState extends State<BookListTile> {
                 Navigator.of(context).push(libToPreviewRoute());
               },
               child: Image.network(
-                book.imageUrl,
+               bookInfo.imageUrl,
                 fit: BoxFit.fill,
               ),
             ),
@@ -60,7 +61,7 @@ class _BookListTileState extends State<BookListTile> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(book.title,
+                  Text(bookInfo.title,
                       textAlign: TextAlign.left,
                       style: Theme.of(context)
                           .textTheme
@@ -68,7 +69,7 @@ class _BookListTileState extends State<BookListTile> {
                           .copyWith(fontSize: 16)),
                   SizedBox(height: 5),
                   Text(
-                    book.author,
+                    bookInfo.author,
                     style: TextStyle(fontSize: 12),
                   ),
                   SizedBox(height: 5),

@@ -115,7 +115,7 @@ UserModel c = UserModel(
           id:"culture",
           title: "Culture Code",
           author: "Daniel Coyle",
-          imageUrl: "",
+          imageUrl: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fwww.porchlightbooks.com%2Fglobalassets%2Fbook-covers%2F9780804176989.jpg%3Fw%3D1000%26scale%3Dboth%26mode%3Dcrop%26u%3D637045000342670000",
           previewText: cultureCodePreview,
             ),
         isDone: false,
@@ -160,8 +160,8 @@ List<BookModel> storeBooks = [
       id:"blindspot",
         bookInfo: BookInfo(
       title: "Blindspot",
-      author: "",
-      imageUrl: "",
+      author: "Author",
+      imageUrl: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F41DWwvA3XOL.jpg",
       previewText: blindspotPreview,
       )  ),
     BookModel(
@@ -169,7 +169,7 @@ List<BookModel> storeBooks = [
         bookInfo: BookInfo(
       title: "Culture Code",
       author: "Daniel Coyle",
-      imageUrl: "",
+      imageUrl: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fwww.porchlightbooks.com%2Fglobalassets%2Fbook-covers%2F9780804176989.jpg%3Fw%3D1000%26scale%3Dboth%26mode%3Dcrop%26u%3D637045000342670000",
       previewText: cultureCodePreview,
         )
     ),
