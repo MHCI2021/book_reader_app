@@ -1,2 +1,2 @@
-export 'book.dart';
+export 'book_model.dart';
 export 'user.dart';

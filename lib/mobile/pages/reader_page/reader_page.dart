@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:scroll_book/mobile/pages/reader_page/components/crousel_test.dart';
 import 'package:scroll_book/mobile/pages/reader_page/components/text_scroll_widget.dart';
 import 'package:scroll_book/mobile/menu_bars/bottom_bar.dart';
 import 'package:scroll_book/mobile/menu_bars/menu_button.dart';
+import 'package:scroll_book/mobile/pages/reader_page/components/text_swipe_widget.dart';
 import 'package:scroll_book/state/state.dart';
+import 'package:scroll_book/utils/fonts.dart';
 import 'components/top_menu_bar.dart';
 
+
+enum TestVersion {
+  Highlight,
+  Carousel,
+  Roledex,
+  Swipe,
+  Dot
+}
 class ReaderPage extends StatefulWidget {
   @override
   _ReaderPageState createState() => _ReaderPageState();
@@ -13,13 +24,18 @@ class ReaderPage extends StatefulWidget {
 class _ReaderPageState extends State<ReaderPage> {
   bool playing = true;
   bool isSpeedShown = false, isFontMenuShown = false;
+  TestVersion v = TestVersion.Carousel;
+
 
   @override
   Widget build(BuildContext context) {
     var appState = locator<AppState>();
     return Scaffold(
       body: Stack(children: [
-        TextScrollWidget(),
+        //TextScrollWidget(),
+        getVersion(),
+        //TextSwipeWidget(),
+        
         TopMenuBar(),
         BottomBar(
           children: [
@@ -57,11 +73,63 @@ class _ReaderPageState extends State<ReaderPage> {
             )
           ],
         ),
-       isSpeedShown?_speedMenu():SizedBox()
+       isSpeedShown?_speedMenu():SizedBox(),
+
+        Align(
+  alignment: Alignment.bottomCenter,
+  child:   Padding(
+    padding:EdgeInsets.only(bottom:100.0),
+    child: Container(height: 70, color: Colors.grey[300].withOpacity(0.9),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children:[
+        SizedBox(width:15),
+         new DropdownButton<String>(
+    items: getGoogleFonts.keys.map((String value) {
+      return new DropdownMenuItem<String>(
+        value: value,
+        child: new Text(value),
+      );
+    }).toList(),
+    value: appState.fontFam,
+    onChanged: (val) {
+      setState(() {
+        appState.fontFam= val;
+      });
+    }
+    ),
+    Center(child: IconButton(icon: Icon(Icons.minimize), onPressed: (){
+     if(appState.fontSize>8){
+       setState(() {
+         appState.fontSize-=1;
+    });
+     }
+
+    })),
+  IconButton(icon: Icon(Icons.add), onPressed: (){
+    setState(() {
+      appState.fontSize+=1;
+    });
+  }),
+  
+      ])),
+  )),
       ]),
     );
   }
 
+Widget getVersion(){
+  switch (v) {
+    case TestVersion.Carousel:
+      return VerticalSliderDemo();
+      break;
+    case TestVersion.Swipe:
+      return TextSwipeWidget();
+      break;
+    default: 
+      return TextScrollWidget();
+  }
+}
 
   Widget _speedMenu()=> Positioned(
             bottom: 80.0,
