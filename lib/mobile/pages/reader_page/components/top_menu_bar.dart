@@ -39,7 +39,7 @@ class TopMenuBar extends StatelessWidget {
               w: height,
               onPressed: () {},
             ),
-            title: Text(appState.currentBook.title,
+            title: Text(appState.currentBook.bookInfo.title,
                 style: Theme.of(context).textTheme.headline2)));
   }
 }

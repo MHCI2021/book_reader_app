@@ -18,10 +18,10 @@ class LibraryScrollView extends StatelessWidget {
         GradientContainer(
           height: s.height * 0.45,
           begin: GradientInfo(
-              color:appState.currentBook.color1,
+              color:appState.currentBook.bookInfo.color1,
               alignment: Alignment.topLeft),
           end: GradientInfo(
-            color: appState.currentBook.color2,
+            color: appState.currentBook.bookInfo.color2,
             alignment: Alignment.bottomRight,
           ),
         ),
@@ -37,16 +37,16 @@ class LibraryScrollView extends StatelessWidget {
                   width: s.width / 2,
                   height: 1.5 * s.width / 2,
                   child: Image.network(
-                    appState.currentBook.imageUrl,
+                    appState.currentBook.bookInfo.imageUrl,
                     fit: BoxFit.fill,
                   ),
                 ),
                 SizedBox(height: 10),
-                Text(appState.currentBook.title,
+                Text(appState.currentBook.bookInfo.title,
                     style: Theme.of(context).textTheme.headline2),
                 SizedBox(height: 10),
                 Text(
-                  appState.currentBook.author,
+                  appState.currentBook.bookInfo.author,
                 ),
                 ProgressBar(progress: 0.25,),
                 Padding(

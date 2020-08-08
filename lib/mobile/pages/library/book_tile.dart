@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:scroll_book/mobile/route_transitions.dart';
+import 'package:scroll_book/models/library_book_model.dart';
 import 'package:scroll_book/models/models.dart';
 import 'package:scroll_book/state/state.dart';
 

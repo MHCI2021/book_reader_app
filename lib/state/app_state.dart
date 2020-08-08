@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:scroll_book/models/book.dart';
+import 'package:scroll_book/models/book_model.dart';
+import 'package:scroll_book/models/library_book_model.dart';
 import 'package:scroll_book/models/user.dart';
 import 'package:scroll_book/utils/fonts.dart';
 // /https://blog.codemagic.io/deploying-flutter-app-to-firebase-app-distribution-using-fastlane/
@@ -58,16 +59,15 @@ UserModel c = UserModel(
   lastName: "Shannon",
   library: [
     LibraryBook(
-      bookID:"learn",
-      title: "How Buildings Learn",
-      author: "Stewart Brand",
-      imageUrl: "https://img1.od-cdn.com/ImageType-400/1523-1/1FA/701/FE/%7B1FA701FE-EC71-4D4E-805D-04F4CCA4E23E%7DImg400.jpg",
-      color1: Color.fromRGBO(253, 255, 239,1.0),
-      color2: Color.fromRGBO(178, 196, 245,1.0),
+      bookInfo: BookInfo(
+            title: "How Buildings Learn",
+            author: "Stewart Brand",
+            imageUrl: "https://img1.od-cdn.com/ImageType-400/1523-1/1FA/701/FE/%7B1FA701FE-EC71-4D4E-805D-04F4CCA4E23E%7DImg400.jpg",
+            previewText: learnPreview,
+      ),
       isDone: false,
       isStarted: true,
       progress: 0.3,
-      wordCount: 45040,// todo
       chapterNum: 2,
       chapterSentenceNum: 20,
       chapterText: learn,
@@ -75,16 +75,15 @@ UserModel c = UserModel(
       ]
     ),
     LibraryBook(
-      bookID: "ruined",
+         bookInfo: BookInfo(
       title: "Ruined By Design",
       author: "Mike Montero",
       imageUrl: "https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
+      previewText: designerPreview,
+     ) ,
       isDone: false,
       isStarted: true,
-      color1: Color.fromRGBO(243, 236, 218,1.0),
-      color2: Color.fromRGBO(255, 163, 169,1.0),
       progress: 0.5,
-      wordCount: 45040,// todo
       chapterNum: 1,
       chapterSentenceNum: 10,
       chapterText: designers,
@@ -93,16 +92,18 @@ UserModel c = UserModel(
     ),
 
     LibraryBook(
-      bookID: "sprint",
-      title: "Sprint",
-      author: "Jake Knapp",
-      imageUrl: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447560400l/27831864._SY475_.jpg",
+        bookInfo: BookInfo(
+           id: "sprint",
+            title: "Sprint",
+            author: "Jake Knapp",
+            imageUrl: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447560400l/27831864._SY475_.jpg",
+            color1: Color.fromRGBO(255, 255, 223,1.0),
+            color2: Color.fromRGBO(158, 223, 236,1.0),
+            wordCount: 45040,// todo
+        ),
       isDone: false,
       isStarted: false,
       progress: 0.3,
-      wordCount: 45040,// todo
-      color1: Color.fromRGBO(255, 255, 223,1.0),
-      color2: Color.fromRGBO(158, 223, 236,1.0),
       chapterNum: 4,
       chapterSentenceNum: 5,
       chapterText: sprint,
@@ -110,20 +111,19 @@ UserModel c = UserModel(
       ]
     ),
     LibraryBook(
-      bookID: "culture",
-      title: "Culture Code",
-      author: "Daniel Coyle",
-      imageUrl: "https://www.porchlightbooks.com/globalassets/book-covers/9780804176989.jpg?w=1000&scale=both&mode=crop&u=637045000342670000",
-      isDone: false,
-      isStarted: false,
-      color1: Color.fromRGBO(244, 225, 198,1.0),
-      color2: Color.fromRGBO(187, 187, 187,1.0),
-      progress: 0.3,
-      wordCount: 45040,// todo
-      chapterNum: 4,
-      chapterSentenceNum: 5,
-      chapterText: sprint,
-      bookmarks: [
+      bookInfo: BookInfo(
+          id:"culture",
+          title: "Culture Code",
+          author: "Daniel Coyle",
+          imageUrl: "",
+          previewText: cultureCodePreview,
+            ),
+        isDone: false,
+        isStarted: false,
+        chapterNum: 4,
+        chapterSentenceNum: 5,
+        chapterText: sprint,
+        bookmarks: [
       ]
     ),
   ]
@@ -133,39 +133,45 @@ UserModel c = UserModel(
 List<BookModel> storeBooks = [
     BookModel(
       id: "ruined",
+        bookInfo: BookInfo(
       title: "Ruined By Design",
       author: "Mike Montero",
       imageUrl: "https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
       previewText: designerPreview,
-     ),
+     ) ),
   BookModel(
     id: "sprint",
+      bookInfo: BookInfo(
     title: "Sprint",
     author: "Jake Knapp",
     imageUrl: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447560400l/27831864._SY475_.jpg",
     previewText: sprintPreview,
-      ),
+   ) ),
   BookModel(
     id:"learn",
+      bookInfo: BookInfo(
     title: "How Buildings Learn",
     author: "Stewart Brand",
     imageUrl: "https://img1.od-cdn.com/ImageType-400/1523-1/1FA/701/FE/%7B1FA701FE-EC71-4D4E-805D-04F4CCA4E23E%7DImg400.jpg",
     previewText: learnPreview,
-    
+      )
      ),
     BookModel(
       id:"blindspot",
+        bookInfo: BookInfo(
       title: "Blindspot",
       author: "",
       imageUrl: "",
       previewText: blindspotPreview,
-    ),
+      )  ),
     BookModel(
       id:"culture",
+        bookInfo: BookInfo(
       title: "Culture Code",
       author: "Daniel Coyle",
       imageUrl: "",
       previewText: cultureCodePreview,
+        )
     ),
 
 ];
