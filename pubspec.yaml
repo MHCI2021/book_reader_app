@@ -34,7 +34,7 @@ dependencies:
   firebase_core: ^0.4.0+9
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^5.0.2
-
+  flutter_svg:
   # Add the dependencies for any other Firebase products you want to use in your app
   # For example, to use Firebase Authentication and Cloud Firestore
   firebase_auth: ^0.14.0+5
@@ -61,15 +61,18 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icons/2x.png
-    - assets/icons/back.png
-    - assets/icons/back5.png
-    - assets/icons/bookshelf.png
-    - assets/icons/font.png
-    - assets/icons/forward5.png
-    - assets/icons/pause.png
-    - assets/icons/play.png
-    - assets/icons/profile.png
-    - assets/icons/show-more.png
+    - assets/icons/back.svg
+    - assets/icons/back15.svg
+    - assets/icons/library-inactive.svg
+    - assets/icons/library-active.svg
+    - assets/icons/bookstore-active.svg
+    - assets/icons/bookstore-inactive.svg
+    - assets/icons/forward15.svg
+    - assets/icons/pause.svg
+    - assets/icons/play.svg
+    - assets/icons/profile-active.svg
+    - assets/icons/profile-inactive.svg
+    - assets/icons/show_more.svg
     - assets/images/ruined.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see

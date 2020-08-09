@@ -5,6 +5,7 @@ import 'package:scroll_book/models/book_model.dart';
 import 'package:scroll_book/models/library_book_model.dart';
 import 'package:scroll_book/models/user.dart';
 import 'package:scroll_book/pages/library/library_list_view/library_list_view.dart';
+import 'package:scroll_book/state/state.dart';
 import 'package:scroll_book/utils/fonts.dart';
 
 // /https://blog.codemagic.io/deploying-flutter-app-to-firebase-app-distribution-using-fastlane/
@@ -15,75 +16,127 @@ class AppState extends ChangeNotifier {
 
   bool isPlaying = false;
   String fontFam = 'Alegreya Sans';
-  double progress, fontSize = 16.0;
+  //double progress, fontSize = 16.0;
   UserModel currentUser, userProfile;
-  LibraryBook _currentBook;
-  //FlutterTts flutterTts = FlutterTts();
-
-  //List<LibraryBook> libBooks;
 
   AppState();
-  LibraryBook get currentBook => _currentBook;
-  //libBooks[0];
-
-  play() {
-    if (!isPlaying) {
-      isPlaying = true;
-      notifyListeners();
-    }
-  }
-
-  pause() {
-    if (isPlaying) {
-      isPlaying = false;
-      notifyListeners();
-    }
-  }
-
-
-  TextStyle get currentTextStyle =>getGoogleFonts[fontFam](TextStyle(fontSize: 16.0, color: Colors.black));
-  init() async {
+    init() async {
     //cOXfQtu96Drok7c01qh1
     currentUser = b;
-   // var dummyUser =  await Firestore.instance.collection('users').document('cOXfQtu96Drok7c01qh1').get();
-    //currentUser = UserModel.fromFirebase( dummyUser.documentID, dummyUser.data);
-   // print(dummyUser.data);
-  
-    //var chapterData = await Firestore.instance.collection('books').document('7sTQD2II1dpxWfSSUGfk').get();
-    //.collection('chapters').document("0").get();
-   // print(chapterData.data);
-    print("Done");
-    // libBooks = currentUser.library;
+    var libState = locator<LibState>();
+    libState.init(b.library);
+
   }
 
   Widget getCurrentScreen() => LibraryListView();
-
-  String getText() => "";
-
-  List<LibraryBook> getInProgressBooks() =>
-      currentUser.library.where((element) => element.isStarted).toList() ?? [];
-  List<LibraryBook> getToStartBooks() =>
-      currentUser.library.where((element) => !element.isStarted).toList() ?? [];
- //setBook(LibraryBook _newBook) => _currentBook = _newBook;
- setBook(LibraryBook _newBook) async{
-   // await flutterTts.speak(designerPreview);
-   _currentBook = _newBook;
-
-   // var chapterData = await Firestore.instance.collection('books').document('7sTQD2II1dpxWfSSUGfk').get();
-    //.collection('chapters').document("0").get();
-    //print(chapterData.data);
-   //var chapterData =  await Firestore.instance.collection('users').document('cOXfQtu96Drok7c01qh1').collection('chapters').document("0").get();
- }
-  getTextBlocks() => _currentBook.chapterText
-      .replaceAll(".", ".&&")
-      .replaceAll("&&\"", "\"&&")
-      .replaceAll("&&)", ")&&")
-      .split("&&")
-      .map((e) => e.trim() + " ")
-      .toList();
-  getFontStyle() => getGoogleFonts[fontFam](
-      TextStyle(color: Colors.black, fontSize: fontSize));
 }
+ // LibraryBook _currentBook;
+  //FlutterTts flutterTts = FlutterTts();
+  //List<LibraryBook> libBooks;
+
+  //LibraryBook get currentBook => _currentBook;
+  //libBooks[0];
+
+  // play() {
+  //   if (!isPlaying) {
+  //     isPlaying = true;
+  //     notifyListeners();
+  //   }
+  // }
+
+  // pause() {
+  //   if (isPlaying) {
+  //     isPlaying = false;
+  //     notifyListeners();
+  //   }
+  // }
+
+
+  //TextStyle get currentTextStyle =>getGoogleFonts[fontFam](TextStyle(fontSize: 16.0, color: Colors.black));
+    
+    //var dummyUser =  await Firestore.instance.collection('users').document('cOXfQtu96Drok7c01qh1').get();
+    //currentUser = UserModel.fromFirebase( dummyUser.documentID, dummyUser.data);
+   // print(dummyUser.data);
+
+    //print("Done");
+    // libBooks = currentUser.library;
+
+// // /https://blog.codemagic.io/deploying-flutter-app-to-firebase-app-distribution-using-fastlane/
+// enum Overlays { BookOptions, ScrollSpeed, Highlight, FontSize }
+
+// class AppState extends ChangeNotifier {
+//   Map userProfileData;
+
+//   bool isPlaying = false;
+//   String fontFam = 'Alegreya Sans';
+//   double progress, fontSize = 16.0;
+//   UserModel currentUser, userProfile;
+//   LibraryBook _currentBook;
+//   //FlutterTts flutterTts = FlutterTts();
+//   //List<LibraryBook> libBooks;
+
+//   AppState();
+//   LibraryBook get currentBook => _currentBook;
+//   //libBooks[0];
+
+//   play() {
+//     if (!isPlaying) {
+//       isPlaying = true;
+//       notifyListeners();
+//     }
+//   }
+
+//   pause() {
+//     if (isPlaying) {
+//       isPlaying = false;
+//       notifyListeners();
+//     }
+//   }
+
+
+//   TextStyle get currentTextStyle =>getGoogleFonts[fontFam](TextStyle(fontSize: 16.0, color: Colors.black));
+//   init() async {
+//     //cOXfQtu96Drok7c01qh1
+//     currentUser = b;
+//     var dummyUser =  await Firestore.instance.collection('users').document('cOXfQtu96Drok7c01qh1').get();
+//     //currentUser = UserModel.fromFirebase( dummyUser.documentID, dummyUser.data);
+//     print(dummyUser.data);
+  
+//     //var chapterData = await Firestore.instance.collection('books').document('7sTQD2II1dpxWfSSUGfk').get();
+//     //.collection('chapters').document("0").get();
+//    // print(chapterData.data);
+//     print("Done");
+//     // libBooks = currentUser.library;
+//   }
+
+//   Widget getCurrentScreen() => LibraryListView();
+
+//   String getText() => "";
+
+//   List<LibraryBook> getInProgressBooks() =>
+//       currentUser.library.where((element) => element.isStarted).toList() ?? [];
+//   List<LibraryBook> getToStartBooks() =>
+//       currentUser.library.where((element) => !element.isStarted).toList() ?? [];
+//  //setBook(LibraryBook _newBook) => _currentBook = _newBook;
+//  setBook(LibraryBook _newBook) async{
+//    // await flutterTts.speak(designerPreview);
+//    _currentBook = _newBook;
+
+//     var chapterData = await Firestore.instance.collection('books').document('7sTQD2II1dpxWfSSUGfk').get();
+//     //.collection('chapters').document("0").get();
+//     //print(chapterData.data);
+//    //var chapterData =  await Firestore.instance.collection('users').document('cOXfQtu96Drok7c01qh1').collection('chapters').document("0").get();
+//  }
+//   getTextBlocks() => _currentBook.chapterText
+//       .replaceAll(".", ".&&")
+//       .replaceAll("&&\"", "\"&&")
+//       .replaceAll("&&)", ")&&")
+//       .split("&&")
+//       .map((e) => e.trim() + " ")
+//       .toList();
+//   getFontStyle() => getGoogleFonts[fontFam](
+//       TextStyle(color: Colors.black, fontSize: fontSize));
+// }
 
 UserModel b = UserModel(
     email: "cshannon@gmail.com",
