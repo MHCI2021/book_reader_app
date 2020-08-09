@@ -1,12 +1,9 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
-import 'package:scroll_book/mobile/pages/library/library_list_view.dart';
-import 'package:scroll_book/mobile/pages/library/library_scroll_view.dart';
 import 'package:scroll_book/state/service_locator.dart';
 import 'package:scroll_book/state/state.dart';
 import 'package:scroll_book/utils/theme.dart';
-import 'dart:io';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +21,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+var appState= locator<AppState>();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: themeData,
@@ -32,8 +29,9 @@ class MyApp extends StatelessWidget {
         observer
       ],
       debugShowCheckedModeBanner: false,
-      home: //(Platform.isIOS || Platform.isAndroid)?LibraryListView(): 
-      LibraryListView(),
+      home: appState.getCurrentScreen()
+      //(Platform.isIOS || Platform.isAndroid)?LibraryListView(): 
+      
     );
   }
 }

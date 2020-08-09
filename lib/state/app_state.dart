@@ -1,199 +1,253 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:scroll_book/models/book_model.dart';
 import 'package:scroll_book/models/library_book_model.dart';
 import 'package:scroll_book/models/user.dart';
+import 'package:scroll_book/pages/library/library_list_view/library_list_view.dart';
 import 'package:scroll_book/utils/fonts.dart';
+
 // /https://blog.codemagic.io/deploying-flutter-app-to-firebase-app-distribution-using-fastlane/
-enum Overlays {
-  BookOptions,
-  ScrollSpeed,
-  Highlight,
-  FontSize
-}
+enum Overlays { BookOptions, ScrollSpeed, Highlight, FontSize }
 
 class AppState extends ChangeNotifier {
   Map userProfileData;
-  
+
   bool isPlaying = false;
-  String fontFam='Alegreya Sans';
-  double progress, fontSize=16.0;
+  String fontFam = 'Alegreya Sans';
+  double progress, fontSize = 16.0;
   UserModel currentUser, userProfile;
   LibraryBook _currentBook;
+  //FlutterTts flutterTts = FlutterTts();
+
   //List<LibraryBook> libBooks;
 
-
-
   AppState();
-  //BookModel get currentBook=>;
-  LibraryBook get currentBook=>_currentBook;
+  LibraryBook get currentBook => _currentBook;
   //libBooks[0];
 
-  play(){if(!isPlaying){isPlaying=true; notifyListeners();}}
-  pause(){if(isPlaying){isPlaying=false; notifyListeners();}}
+  play() {
+    if (!isPlaying) {
+      isPlaying = true;
+      notifyListeners();
+    }
+  }
+
+  pause() {
+    if (isPlaying) {
+      isPlaying = false;
+      notifyListeners();
+    }
+  }
 
 
-  Map getProfileData() => userProfileData ?? {};
-  TextStyle get currentTextStyle=>getGoogleFonts[fontFam](TextStyle(fontSize: 16.0, color: Colors.black));
-  init()async {
+  TextStyle get currentTextStyle =>getGoogleFonts[fontFam](TextStyle(fontSize: 16.0, color: Colors.black));
+  init() async {
     //cOXfQtu96Drok7c01qh1
-    //var dummyUser =  await Firestore.instance.collection('users').document('cOXfQtu96Drok7c01qh1').get();
+    currentUser = b;
+   // var dummyUser =  await Firestore.instance.collection('users').document('cOXfQtu96Drok7c01qh1').get();
     //currentUser = UserModel.fromFirebase( dummyUser.documentID, dummyUser.data);
-    currentUser =c;
-    
-   // libBooks = currentUser.library;
+   // print(dummyUser.data);
+  
+    //var chapterData = await Firestore.instance.collection('books').document('7sTQD2II1dpxWfSSUGfk').get();
+    //.collection('chapters').document("0").get();
+   // print(chapterData.data);
+    print("Done");
+    // libBooks = currentUser.library;
   }
-  String getText(){
-    return "";
-  }
-  List<LibraryBook> getInProgressBooks()=>c.library.where((element) => element.isStarted).toList()??[];
-  List<LibraryBook> getToStartBooks() =>c.library.where((element) => !element.isStarted).toList()??[];
-  setBook(LibraryBook _newBook)=>_currentBook=_newBook;
-  getTextBlocks()=>_currentBook.chapterText.replaceAll(".", ".&&").split("&&").map((e) => e.trim()+" ").toList();
-  getFontStyle()=>getGoogleFonts[fontFam](TextStyle(color: Colors.black, fontSize: fontSize));
+
+  Widget getCurrentScreen() => LibraryListView();
+
+  String getText() => "";
+
+  List<LibraryBook> getInProgressBooks() =>
+      currentUser.library.where((element) => element.isStarted).toList() ?? [];
+  List<LibraryBook> getToStartBooks() =>
+      currentUser.library.where((element) => !element.isStarted).toList() ?? [];
+ //setBook(LibraryBook _newBook) => _currentBook = _newBook;
+ setBook(LibraryBook _newBook) async{
+   // await flutterTts.speak(designerPreview);
+   _currentBook = _newBook;
+
+   // var chapterData = await Firestore.instance.collection('books').document('7sTQD2II1dpxWfSSUGfk').get();
+    //.collection('chapters').document("0").get();
+    //print(chapterData.data);
+   //var chapterData =  await Firestore.instance.collection('users').document('cOXfQtu96Drok7c01qh1').collection('chapters').document("0").get();
+ }
+  getTextBlocks() => _currentBook.chapterText
+      .replaceAll(".", ".&&")
+      .replaceAll("&&\"", "\"&&")
+      .replaceAll("&&)", ")&&")
+      .split("&&")
+      .map((e) => e.trim() + " ")
+      .toList();
+  getFontStyle() => getGoogleFonts[fontFam](
+      TextStyle(color: Colors.black, fontSize: fontSize));
 }
 
+UserModel b = UserModel(
+    email: "cshannon@gmail.com",
+    username: "cshannon",
+    firstName: "Connor",
+    lastName: "Shannon",
+    library: [
+      LibraryBook(
+          bookInfo: BookInfo(
+            id:"7sTQD2II1dpxWfSSUGfk",
+            title: "Ruined By Design",
+            author: "Mike Montero",
+            imageUrl: "https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
+            previewText: designerPreview,
+            color1: Color.fromRGBO(243, 236, 218, 1.0),
+            color2: Color.fromRGBO(255, 163, 169, 1.0),
+          ),
+          isDone: false,
+          isStarted: true,
+          progress: 0.5,
+          chapterNum: 1,
+          chapterSentenceNum: 10,
+          chapterText: designers,
+          bookmarks: []),
+    ]);
+
+
 UserModel c = UserModel(
-  email: "cshannon@gmail.com", 
-  username: null,
-  firstName: "Connor",
-  lastName: "Shannon",
-  library: [
-    LibraryBook(
-      bookInfo: BookInfo(
+    email: "cshannon@gmail.com",
+    username: null,
+    firstName: "Connor",
+    lastName: "Shannon",
+    library: [
+      LibraryBook(
+          bookInfo: BookInfo(
             title: "How Buildings Learn",
             author: "Stewart Brand",
-            imageUrl: "https://img1.od-cdn.com/ImageType-400/1523-1/1FA/701/FE/%7B1FA701FE-EC71-4D4E-805D-04F4CCA4E23E%7DImg400.jpg",
+            imageUrl:
+                "https://img1.od-cdn.com/ImageType-400/1523-1/1FA/701/FE/%7B1FA701FE-EC71-4D4E-805D-04F4CCA4E23E%7DImg400.jpg",
             previewText: learnPreview,
-            color1: Color.fromRGBO(253, 255, 239,1.0),
-            color2: Color.fromRGBO(178, 196, 245,1.0),
-      ),
-      isDone: false,
-      isStarted: true,
-      progress: 0.3,
-      chapterNum: 2,
-      chapterSentenceNum: 20,
-      chapterText: learn,
-      bookmarks: [
-      ]
-    ),
-    LibraryBook(
-         bookInfo: BookInfo(
-      title: "Ruined By Design",
-      author: "Mike Montero",
-      imageUrl: "https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
-      previewText: designerPreview,
-      color1: Color.fromRGBO(243, 236, 218,1.0),
-            color2: Color.fromRGBO(255, 163, 169,1.0),
-     ) ,
-      isDone: false,
-      isStarted: true,
-      progress: 0.5,
-      chapterNum: 1,
-      chapterSentenceNum: 10,
-      chapterText: designers,
-      bookmarks: [
-      ]
-    ),
-
-    LibraryBook(
-        bookInfo: BookInfo(
-           id: "sprint",
+            color1: Color.fromRGBO(253, 255, 239, 1.0),
+            color2: Color.fromRGBO(178, 196, 245, 1.0),
+          ),
+          isDone: false,
+          isStarted: true,
+          progress: 0.3,
+          chapterNum: 2,
+          chapterSentenceNum: 20,
+          chapterText: learn,
+          bookmarks: []),
+      LibraryBook(
+          bookInfo: BookInfo(
+            title: "Ruined By Design",
+            author: "Mike Montero",
+            imageUrl: "https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
+            previewText: designerPreview,
+            color1: Color.fromRGBO(243, 236, 218, 1.0),
+            color2: Color.fromRGBO(255, 163, 169, 1.0),
+          ),
+          isDone: false,
+          isStarted: true,
+          progress: 0.5,
+          chapterNum: 1,
+          chapterSentenceNum: 10,
+          chapterText: designers,
+          bookmarks: []),
+      LibraryBook(
+          bookInfo: BookInfo(
+            id: "sprint",
             title: "Sprint",
             author: "Jake Knapp",
-            imageUrl: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447560400l/27831864._SY475_.jpg",
-            color1: Color.fromRGBO(255, 255, 223,1.0),
-            color2: Color.fromRGBO(158, 223, 236,1.0),
+            imageUrl:
+                "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447560400l/27831864._SY475_.jpg",
+            color1: Color.fromRGBO(255, 255, 223, 1.0),
+            color2: Color.fromRGBO(158, 223, 236, 1.0),
             previewText: sprintPreview,
-            wordCount: 45040,// todo
-        ),
-      isDone: false,
-      isStarted: false,
-      progress: 0.3,
-      chapterNum: 4,
-      chapterSentenceNum: 5,
-      chapterText: sprint,
-      bookmarks: [
-      ]
-    ),
-    LibraryBook(
-      bookInfo: BookInfo(
-          id:"culture",
-          title: "Culture Code",
-          author: "Daniel Coyle",
-          imageUrl: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fwww.porchlightbooks.com%2Fglobalassets%2Fbook-covers%2F9780804176989.jpg%3Fw%3D1000%26scale%3Dboth%26mode%3Dcrop%26u%3D637045000342670000",
-          previewText: cultureCodePreview,
-          color1: Color.fromRGBO(255, 163, 169,1.0),
-            color2: Color.fromRGBO(187, 187, 187,1.0),
-            ),
-        isDone: false,
-        isStarted: false,
-         progress: 0.3,
-        chapterNum: 4,
-        chapterSentenceNum: 5,
-        chapterText: sprint,
-        bookmarks: [
-      ]
-    ),
-  ]
-  );
+            wordCount: 45040, // todo
+          ),
+          isDone: false,
+          isStarted: false,
+          progress: 0.3,
+          chapterNum: 4,
+          chapterSentenceNum: 5,
+          chapterText: sprint,
+          bookmarks: []),
+      LibraryBook(
+          bookInfo: BookInfo(
+            id: "culture",
+            title: "Culture Code",
+            author: "Daniel Coyle",
+            imageUrl:
+                "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fwww.porchlightbooks.com%2Fglobalassets%2Fbook-covers%2F9780804176989.jpg%3Fw%3D1000%26scale%3Dboth%26mode%3Dcrop%26u%3D637045000342670000",
+            previewText: cultureCodePreview,
+            color1: Color.fromRGBO(255, 163, 169, 1.0),
+            color2: Color.fromRGBO(187, 187, 187, 1.0),
+          ),
+          isDone: false,
+          isStarted: false,
+          progress: 0.3,
+          chapterNum: 4,
+          chapterSentenceNum: 5,
+          chapterText: sprint,
+          bookmarks: []),
+    ]);
 
 
-List<BookModel> storeBooks = [
-    BookModel(
+List<BookModel> storeBooks =[];
+List<BookModel> storeBooks2= [
+  BookModel(
       id: "ruined",
-        bookInfo: BookInfo(
-      title: "Ruined By Design",
-      author: "Mike Montero",
-      imageUrl: "https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
-      previewText: designerPreview,
-      color1: Color.fromRGBO(255, 255, 223,1.0),
-            color2: Color.fromRGBO(158, 223, 236,1.0),
-     ) ),
-  BookModel(
-    id: "sprint",
       bookInfo: BookInfo(
-    title: "Sprint",
-    author: "Jake Knapp",
-    imageUrl: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447560400l/27831864._SY475_.jpg",
-    previewText: sprintPreview,
-    color1: Color.fromRGBO(255, 255, 223,1.0),
-            color2: Color.fromRGBO(158, 223, 236,1.0),
-   ) ),
+        title: "Ruined By Design",
+        author: "Mike Montero",
+        imageUrl: "https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
+        previewText: designerPreview,
+        color1: Color.fromRGBO(255, 255, 223, 1.0),
+        color2: Color.fromRGBO(158, 223, 236, 1.0),
+      )),
   BookModel(
-    id:"learn",
+      id: "sprint",
       bookInfo: BookInfo(
-    title: "How Buildings Learn",
-    author: "Stewart Brand",
-    imageUrl: "https://img1.od-cdn.com/ImageType-400/1523-1/1FA/701/FE/%7B1FA701FE-EC71-4D4E-805D-04F4CCA4E23E%7DImg400.jpg",
-    previewText: learnPreview,
-    color1: Color.fromRGBO(255, 255, 223,1.0),
-            color2: Color.fromRGBO(158, 223, 236,1.0),
-      )
-     ),
-    BookModel(
-      id:"blindspot",
-        bookInfo: BookInfo(
-      title: "Blindspot",
-      author: "Author",
-      imageUrl: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F41DWwvA3XOL.jpg",
-      previewText: blindspotPreview,
-      color1: Color.fromRGBO(255, 255, 223,1.0),
-            color2: Color.fromRGBO(158, 223, 236,1.0),
-      )  ),
-    BookModel(
-      id:"culture",
-        bookInfo: BookInfo(
-      title: "Culture Code",
-      author: "Daniel Coyle",
-      imageUrl: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fwww.porchlightbooks.com%2Fglobalassets%2Fbook-covers%2F9780804176989.jpg%3Fw%3D1000%26scale%3Dboth%26mode%3Dcrop%26u%3D637045000342670000",
-      previewText: cultureCodePreview,
-      color1: Color.fromRGBO(255, 255, 223,1.0),
-            color2: Color.fromRGBO(158, 223, 236,1.0),
-        )
-    ),
-
+        title: "Sprint",
+        author: "Jake Knapp",
+        imageUrl:
+            "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447560400l/27831864._SY475_.jpg",
+        previewText: sprintPreview,
+        color1: Color.fromRGBO(255, 255, 223, 1.0),
+        color2: Color.fromRGBO(158, 223, 236, 1.0),
+      )),
+  BookModel(
+      id: "learn",
+      bookInfo: BookInfo(
+        title: "How Buildings Learn",
+        author: "Stewart Brand",
+        imageUrl:
+            "https://img1.od-cdn.com/ImageType-400/1523-1/1FA/701/FE/%7B1FA701FE-EC71-4D4E-805D-04F4CCA4E23E%7DImg400.jpg",
+        previewText: learnPreview,
+        color1: Color.fromRGBO(255, 255, 223, 1.0),
+        color2: Color.fromRGBO(158, 223, 236, 1.0),
+      )),
+  BookModel(
+      id: "blindspot",
+      bookInfo: BookInfo(
+        title: "Blindspot",
+        author: "Author",
+        imageUrl:
+            "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F41DWwvA3XOL.jpg",
+        previewText: blindspotPreview,
+        color1: Color.fromRGBO(255, 255, 223, 1.0),
+        color2: Color.fromRGBO(158, 223, 236, 1.0),
+      )),
+  BookModel(
+      id: "culture",
+      bookInfo: BookInfo(
+        title: "Culture Code",
+        author: "Daniel Coyle",
+        imageUrl:
+            "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fwww.porchlightbooks.com%2Fglobalassets%2Fbook-covers%2F9780804176989.jpg%3Fw%3D1000%26scale%3Dboth%26mode%3Dcrop%26u%3D637045000342670000",
+        previewText: cultureCodePreview,
+        color1: Color.fromRGBO(255, 255, 223, 1.0),
+        color2: Color.fromRGBO(158, 223, 236, 1.0),
+      )),
 ];
-final String designerPreview='''WE ARE GATEKEEPERS
+final String designerPreview = '''WE ARE GATEKEEPERS
 Victor Papanek, who offered us a path toward developing spines in Design for the Real World, referred to designers as gatekeepers. He reminded us of our power, our agency, and our responsibility. He reminded us that labor without counsel is not design. We have a skill-set that people need in order to get things made, and that skill-set includes an inquiring mind and a strong spine. We need to be more than a pair of hands. And we certainly can’t become the hands of unethical men.
 As Victor said, “The only important thing about design is how it relates to people.”
 We are gatekeepers. Nothing should be making it through the gate without our labor and our counsel. We are responsible for the effects of our work once it makes it out into the world. What passes through that gate carries our seal of approval. It carries our name. We are the defense against monsters. Sure, everyone remembers Frankenstein’s monster, but they call it by his maker’s name. The worst of what we create will outlive us.
@@ -248,7 +302,6 @@ Last time I was at my folks’ house, my dad made a salad. Told me everything in
 “Best fucking tomatoes you ever ate.”
 They were indeed.''';
 
-
 final String blindspotPreview = '''1
 Mindbugs
 IT
@@ -280,7 +333,6 @@ the first tabletop fits identically onto the second tabletop, there can
 be only one explanation—you’ve botched the tracing job, because the
 table surfaces are precisely the same. But how can this be?
 ''';
-
 
 final String blindspot = '''
 1
@@ -381,9 +433,6 @@ wonderfully efficient and accurate methods that fail us miserably when we put th
 
 ''';
 
-
-
-
 final String learnPreview = '''CHAPTER 1
 Flow 
 YEAR AFTER YEAR, the cultural elite of San Francisco is treated to the sight of its pre-eminent ladies, resplendently gowned, lined up in public waiting to pee. The occasion is intermission at the annual gala opening of the opera. The ground-floor ladies’ room at the Opera House is too small (the men’s isn’t). This has been the case since the place was built in 1932. As the women are lined up right next to the lobby bar, their plight has become a traditional topic of discussion. The complaints and jokes never change. Neither does the ladies’ room.
@@ -399,7 +448,7 @@ and something else is bound to follow. From the first drawings to the final
 demolition, buildings are shaped and reshaped by changing cultural currents,
 changing real-estate value, and changing usage.
 ''';
-final String learn ='''
+final String learn = '''
 CHAPTER 1
 Flow
 YEAR AFTER YEAR, the cultural elite of San Francisco is treated to the sight of its pre-eminent ladies, resplendently gowned, lined up in public waiting to pee. The occasion is intermission at the annual gala opening of the opera. The ground-floor ladies’ room at the Opera House is too small (the men’s isn’t). This has been the case since the place was built in 1932. As the women are lined up right next to the lobby bar, their plight has become a traditional topic of discussion. The complaints and jokes never change. Neither does the ladies’ room.
@@ -498,8 +547,7 @@ after 56 years. More than half of the 1988 edition was new or revised since the 
 Form follows funding. If people have money to spare, they will mess with their building, at minimum to solve the current set of frustrations with the place, at maximum to show off their wealth, on the reasonable theory that money attracts money. A building is not primarily a building; it is primarily property, and as such, subject to the whims of the market. Commerce drives all before it, especially in cities. Wherever land value is measured in square feet, buildings are as fungible as cash. Cities devour buildings. As for fashion, it is change for its own sake—a constant unbalancing of the status quo, cruelest perhaps to buildings, which would prefer to remain just as they are, heavy and obdurate, a holdout against the times. Buildings are treated by fashion as big, difficult clothing, always lagging embarrassingly behind the mode of the day. This issue has nothing to do with function: fashion is described precisely as “non-functional stylistic dynamism” in Man’s Rage for Chaos by Morse Peckham.5 And fashion is culture-wide and inescapable.
 ''';
 
-
-final String cultureCodePreview='''The Christmas Truce
+final String cultureCodePreview = '''The Christmas Truce
 Of all the difficult and dangerous battlefields in history, the Flanders trenches during the winter of 1914 might top the list. Military scholars tell us that this is due to the fact that World War I marked the historical intersection of modern weapons and medieval strategy.
 But in truth, it was mostly due to the mud. The Flanders trenches were located below sea level, dug out of greasy clay so waterlogged that a rainstorm could transform them into canals. They were cold and miserable, an ideal breeding ground for rats, fleas, disease, and all manner of pestilence.
 The worst part, however, was the closeness of the enemy. Opposing troops were only a few hundred feet apart in many points and occasionally much less. (At one place near Vimy Ridge, two observation posts stood seven meters apart.) Grenades and artillery were a constant threat; a carelessly lit match was an invitation for a sniper’s bullet. As future prime minister Harold Macmillan, then a lieutenant in the Grenadier Guards, wrote, “One can look for miles and see no human being. But in those miles of country lurk…it seems thousands, even hundreds of thousands of men, planning against each other perpetually some new device of death. Never showing themselves, they launch at each other bullet, bomb, aerial torpedo and shell.”
@@ -529,7 +577,7 @@ idea impossible and informed their troops to expect surprise attacks
 on Christmas. Any soldier who attempted to create an illicit truce,
 they warned, would be court-martialed.''';
 
-final String cultureCode='''
+final String cultureCode = '''
 The Christmas Truce
 Of all the difficult and dangerous battlefields in history, the Flanders trenches during the winter of 1914 might top the list. Military scholars tell us that this is due to the fact that World War I marked the historical intersection of modern weapons and medieval strategy.
 But in truth, it was mostly due to the mud. The Flanders trenches were located below sea level, dug out of greasy clay so waterlogged that a rainstorm could transform them into canals. They were cold and miserable, an ideal breeding ground for rats, fleas, disease, and all manner of pestilence.
@@ -816,7 +864,7 @@ While it’s useful to spend time with successful cultures, it’s equally usefu
 
 ''';
 
-final String sprintPreview ='''Introduction
+final String sprintPreview = '''Introduction
 One overcast morning in May 2014, John Zeratsky walked into a drab beige building in Sunnyvale, California. John was there to talk with Savioke Labs, one of Google Ventures’ newest investments. He wound his way through a labyrinth of corridors and up a short flight of stairs, found the plain wooden door marked 2B, and went inside.
 Now, tech companies tend to be a little disappointing to those expecting glowing red computer eyes, Star Trek–style holodecks, or top secret blueprints. Most of Silicon Valley is essentially a bunch of desks, computers, and coffee cups. But behind door 2B there were piles of circuit boards, plywood cutouts, and plastic armatures fresh off the 3D printer. Soldering irons, drills, and blueprints. Yes, actual top secret blueprints. “This place,” thought John, “looks like a startup should look.”
 Then he saw the machine. It was a three-and-a-half-foot-tall cylinder, roughly the size and shape of a kitchen trash can. Its glossy white body had a flared base and an elegant taper. There was a small computer display affixed to the top, almost like a face. And the machine could move. It glided across the floor under its own power.
@@ -831,7 +879,7 @@ John nodded. “Personally, I find elevators awkward with other humans.”
 Savioke had only been in business for a few months. They’d focused on getting the design and engineering right. They’d negotiated the pilot with Starwood, a hotel chain with hundreds of properties. But they still had big questions to answer. Mission-critical, make-or-break type questions, and only a few weeks to figure out the answers before the hotel pilot began.
 It was the perfect time for a sprint.''';
 
-final String sprint ='''Introduction
+final String sprint = '''Introduction
 One overcast morning in May 2014, John Zeratsky walked into a drab beige building in Sunnyvale, California. John was there to talk with Savioke Labs, one of Google Ventures’ newest investments. He wound his way through a labyrinth of corridors and up a short flight of stairs, found the plain wooden door marked 2B, and went inside.
 Now, tech companies tend to be a little disappointing to those expecting glowing red computer eyes, Star Trek–style holodecks, or top secret blueprints. Most of Silicon Valley is essentially a bunch of desks, computers, and coffee cups. But behind door 2B there were piles of circuit boards, plywood cutouts, and plastic armatures fresh off the 3D printer. Soldering irons, drills, and blueprints. Yes, actual top secret blueprints. “This place,” thought John, “looks like a startup should look.”
 Then he saw the machine. It was a three-and-a-half-foot-tall cylinder, roughly the size and shape of a kitchen trash can. Its glossy white body had a flared base and an elegant taper. There was a small computer display affixed to the top, almost like a face. And the machine could move. It glided across the floor under its own power.

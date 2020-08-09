@@ -39,8 +39,9 @@ dependencies:
   # For example, to use Firebase Authentication and Cloud Firestore
   firebase_auth: ^0.14.0+5
   cloud_firestore: ^0.12.9+5
-  carousel_slider:
-  rolodex:
+  #carousel_slider:
+  #https://pub.dev/packages/flutter_tts
+  flutter_tts:
 
 dev_dependencies:
   flutter_test:

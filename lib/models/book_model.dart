@@ -11,11 +11,9 @@ class BookModel {
   BookModel({@required this.bookInfo, this.chapters, this.id});
   BookModel.fromFirebase(String id, Map<String, dynamic> map)
       : this.id = id,
-        this.bookInfo = BookInfo.fromFirebase(safe("bookInfo", map)),
+        this.bookInfo = BookInfo.fromFirebase( map),
         this.chapters = safe("chapters", map)
             ?.map<SectionInfo>((b) => SectionInfo.fromFirebase(b));
-
- 
 }
 
 @immutable
@@ -45,8 +43,8 @@ class BookInfo {
         this.author = safe("author", map),
         this.imageUrl = safe("imageUrl", map),
         this.previewText = safe('previewText', map) ?? ruinedByD,
-        this.color1 = Colors.white,
-        this.color2 = Colors.white,
+       this.color1= Color.fromRGBO(243, 236, 218,1.0),
+        this.color2= Color.fromRGBO(255, 163, 169,1.0),
         this.wordCount = safe("words", map),
         this.chaptersInfo = safe("chapters", map) ??
             safe("sections", map) ??
@@ -93,6 +91,13 @@ List<BookModel> books = [
         "https://i0.wp.com/www.creativityatwork.com/wp-content/uploads/9780262526708-e1482464548272.jpg?resize=200%2C296",
   )),
 ];
+
+
+Map sects = {
+  "sectionID":"text",
+};
+
+
 
 // class BookModel {
 //   final String id;
