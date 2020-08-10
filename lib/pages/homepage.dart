@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:scroll_book/pages/library/library_home.dart';
 import 'package:scroll_book/state/state.dart';
 
-import 'package:scroll_book/utils/custom_expansion_tile.dart' as custom;
+//import 'package:scroll_book/utils/custom_expansion_tile.dart' as custom;
 
-import 'library/library_list_view/library_list_view.dart';
+import 'library/library_list_view.dart';
 //https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447560400l/27831864._SY475_.jpg
 //"https://m.media-amazon.com/images/I/41P0vehqsRL.jpg",
 //
@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   int _currentIndex=0;
+   int _currentIndex=1;
    final List<Widget> _children = [
         Container(color:Colors.grey),
         LibraryHome(),
@@ -31,20 +31,20 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Size s = MediaQuery.of(context).size;
-    var appState= locator<AppState>();
+   // Size s = MediaQuery.of(context).size;
+  //  var appState= locator<AppState>();
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: onTabTapped,
         items: [
           BottomNavigationBarItem(
-           icon: new Icon(Icons.home),
-           title: new Text('Home'),
+           icon: new Icon(Icons.store),
+           title: new Text('Bookstore'),
          ),
          BottomNavigationBarItem(
-           icon: new Icon(Icons.mail),
-           title: new Text('Messages'),
+           icon: new Icon(Icons.book),
+           title: new Text('Library'),
          ),
          BottomNavigationBarItem(
            icon: Icon(Icons.person),

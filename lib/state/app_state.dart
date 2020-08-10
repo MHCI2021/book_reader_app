@@ -1,12 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:scroll_book/models/book_model.dart';
+import 'package:scroll_book/models/bookmark_model.dart';
 import 'package:scroll_book/models/library_book_model.dart';
 import 'package:scroll_book/models/user.dart';
-import 'package:scroll_book/pages/library/library_list_view/library_list_view.dart';
+import 'package:scroll_book/pages/homepage.dart';
 import 'package:scroll_book/state/state.dart';
-import 'package:scroll_book/utils/fonts.dart';
 
 // /https://blog.codemagic.io/deploying-flutter-app-to-firebase-app-distribution-using-fastlane/
 enum Overlays { BookOptions, ScrollSpeed, Highlight, FontSize }
@@ -25,11 +23,15 @@ class AppState extends ChangeNotifier {
     currentUser = b;
     var libState = locator<LibState>();
     libState.init(b.library);
-
   }
 
-  Widget getCurrentScreen() => LibraryListView();
+ Widget getCurrentScreen() => HomePage();
 }
+
+
+
+
+
  // LibraryBook _currentBook;
   //FlutterTts flutterTts = FlutterTts();
   //List<LibraryBook> libBooks;
@@ -160,7 +162,51 @@ UserModel b = UserModel(
           chapterNum: 1,
           chapterSentenceNum: 10,
           chapterText: designers,
-          bookmarks: []),
+          bookmarks: [
+            Bookmark(
+              chapter: "Chapter 1",
+              secondStarts: 60,
+              secondEnds: 90,
+              note: "Story about his dad and the fox"
+            ),
+             Bookmark(
+              chapter: "Chapter 1",
+              secondStarts: 345,
+              secondEnds: 650,
+              note: "Discussing his dislike of Twitter"
+            ),
+             Bookmark(
+              chapter: "Chapter 2",
+              secondStarts: 45,
+              secondEnds: 250,
+              note: "Discussing his dislike of Twitter"
+            ),
+          ],
+          highlights: [
+            Note(
+              text:"We overlook just how large a role we all play—and by \"we\" I mean society—in determining who makes it and who doesn't.",
+              highlightColor: Colors.orange,
+              locationString: "Chapter 1 at 3:45"
+            ),
+             Note(
+              text:"We are too much in awe of those who succeed and far too dismissive of those who fail.",
+             highlightColor: Colors.yellow,
+               locationString: "Chapter 1 at 7:34"
+             )
+          ],
+          notes: [
+            Note(
+              text:"We are too much in awe of those who succeed and far too dismissive of those who fail.",
+              note: "Reminds me of this one TED talk about failure and leaving people in the dust. How can we sit with ourselves to neglecting others? ",
+              locationString: "Chapter 1 at 3:45"
+            ),
+             Note(
+              text:"We overlook just how large a role we all play—and by \"we\" I mean society—in determining who makes it and who doesn't.",
+              note: "Such an important point to remember",
+              locationString: "Chapter 1 at 7:34"
+             )
+          ],
+          ),
     ]);
 
 
