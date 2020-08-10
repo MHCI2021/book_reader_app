@@ -5,11 +5,24 @@ import 'package:scroll_book/models/library_book_model.dart';
 import 'package:scroll_book/state/app_state.dart';
 import 'package:scroll_book/utils/fonts.dart';
 
+enum ReaderOverlays{
+  VolSpeed,
+  Font,
+  TopMenu,
+  NewNote,
+  NoteInfo,
+  ChapterList,
+}
+//DefaultBottom,
+
+
 class ReaderController extends ChangeNotifier {
  bool isPlaying = false, isScrolling=false;
   String fontFam = 'Alegreya Sans';
   double progress, fontSize = 16.0;
+  double volume = 50.0;
   LibraryBook _currentBook;
+  double chapterTime=300.0, currentTime=0.0;
   FlutterTts flutterTts;
   List<String> textBlocks;
   int currentIndex;
@@ -28,6 +41,10 @@ class ReaderController extends ChangeNotifier {
         //next();
         notifyListeners();
       }
+     });
+      flutterTts.setProgressHandler((String text, int startOffset, int endOffset, String word) {
+        print("handle");
+        print(word);
      });
   }
    List<String> _getTextBlocks(int sentenceStart) {
