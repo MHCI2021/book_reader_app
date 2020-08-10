@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MenuButton extends StatelessWidget {
   final double h, w;
@@ -12,7 +13,11 @@ class MenuButton extends StatelessWidget {
                 onTap: onPressed,
                 child: Container(
                   height: h, width: w,
-                  child: Image.asset("assets/icons/$asset.png"),
+                  child: SvgPicture.asset(
+                    "assets/icons/$asset.svg",
+                    // placeholderBuilder: (context) => CircularProgressIndicator(),
+                    height: h,
+                  ),
                 ),
               );
   }

@@ -17,6 +17,8 @@ class LibraryBook {
   final int chapterNum;
   final BookInfo bookInfo; 
   final List<Bookmark> bookmarks;
+  final List<Note> highlights;
+  final List<Note> notes;
 
   LibraryBook({
     @required this.bookInfo,
@@ -27,6 +29,8 @@ class LibraryBook {
     this.bookmarks,
     this.chapterNum,
     this.chapterSentenceNum, 
+    this.highlights,
+    this.notes
  //   this.notes
     });
 
@@ -38,7 +42,9 @@ class LibraryBook {
     this.chapterText = safe("chapterText", map),
     this.chapterSentenceNum= safe("chapterSentenceNum", map),
     this.chapterNum = safe("chapterNum", map),
-    this.bookmarks = safeGet(key:"bookmarks", map:map, alt: []).map<Bookmark>((b)=>Bookmark.fromFirebase(b)).toList();
+    this.bookmarks = safeGet(key:"bookmarks", map:map, alt: []).map<Bookmark>((b)=>Bookmark.fromFirebase(b)).toList(),
+    this.notes = safeGet(key:"notes", map:map, alt: []).map<Note>((b)=>Note.fromFirebase(b)).toList(),
+    this.highlights = safeGet(key:"highlights", map:map, alt: []).map<Note>((b)=>Note.fromFirebase(b)).toList();
   
 }
 
