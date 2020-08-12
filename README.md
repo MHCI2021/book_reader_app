@@ -101,6 +101,12 @@ lib
     └── utils.dart
 ```
 
+Flow Overview
+
+Login Screen -> User Initialized -> App State
+
+
+
 
 
 **Setting Up Project Locally**

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:scroll_book/utils/utils.dart';
 
 
-
 class Note{
   final String id;
   final String bookID;
@@ -24,7 +23,7 @@ class Note{
     this.note,
     this.highlightColor
   });
-  Note.fromFirebase(Map<String, dynamic> map):
+  Note.fromFirebase(Map map):
     this.id= safe("id",map),
     this.bookID= safe("bookID", map), 
     this.text=safe("text", map), 
@@ -51,15 +50,13 @@ class Bookmark{
     this.note,
     this.tags
   });
-  Bookmark.fromFirebase(Map<String, dynamic> map, ):
-    
+  Bookmark.fromFirebase(Map map, ):
     this.bookID= safe("bookID", map), 
     this.chapter=safe("chapter", map), 
     this.secondEnds= safe("secondEnds", map),
     this.secondStarts= safe("secondStarts", map),
     this.note= safe("note", map),
     this.tags = safeGet(key:"tags", map:map, alt: []); 
-  
 }
 
 

@@ -1,3 +1,4 @@
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_book/models/book_model.dart';
 import 'package:scroll_book/models/bookmark_model.dart';
@@ -18,11 +19,20 @@ class AppState extends ChangeNotifier {
   UserModel currentUser, userProfile;
 
   AppState();
-    init() async {
+    init() {
     //cOXfQtu96Drok7c01qh1
+    
+   //var data = Firestore.instance.collection("users");
+   //var docs = await data.getDocuments();
+
+   //.document("cOXfQtu96Drok7c01qh1").get();
+    // print(data.data);
     currentUser = b;
     var libState = locator<LibState>();
     libState.init(b.library);
+    //UserModel.fromFirebase("cOXfQtu96Drok7c01qh1", data.data);
+    print(currentUser.firstName);
+ 
   }
 
  Widget getCurrentScreen() => HomePage();

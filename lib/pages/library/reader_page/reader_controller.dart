@@ -6,16 +6,6 @@ import 'package:scroll_book/state/app_state.dart';
 import 'package:scroll_book/state/state.dart';
 import 'package:scroll_book/utils/fonts.dart';
 
-enum ReaderOverlay{
-  VolSpeed,
-  Font,
-  TopMenu,
-  NewNote,
-  NoteInfo,
-  ChapterList,
-}
-//DefaultBottom,
-
 
 class ReaderController extends ChangeNotifier {
  bool isPlaying = false, isScrolling=false;
@@ -26,7 +16,7 @@ class ReaderController extends ChangeNotifier {
   double chapterTime=300.0, currentTime=0.0;
   FlutterTts flutterTts;
   List<String> textBlocks;
-  ReaderOverlay currentOverlay; 
+ 
   int currentIndex;
   ReaderController();
   
@@ -45,17 +35,11 @@ class ReaderController extends ChangeNotifier {
       }
      });
       flutterTts.setProgressHandler((String text, int startOffset, int endOffset, String word) {
-        print("handle");
-        print(word);
+        //print("handle");
+        //print(word);
      });
   }
-  closeOverlay(){
-     currentOverlay = null;
-   }
 
-   setOverlay(ReaderOverlay _newOverlay){
-     currentOverlay = _newOverlay;
-   }
 
    List<String> _getTextBlocks(int sentenceStart) {
     List<String> blocks = [""];
@@ -70,6 +54,10 @@ class ReaderController extends ChangeNotifier {
   }
 
   setIndex(int newIndex)=>currentIndex=newIndex;
+  setFontFam(String val){
+    fontFam=val;
+    notifyListeners();
+  }
   play() {
     print("Play");
     if (!isPlaying || !isScrolling) {
@@ -107,7 +95,29 @@ class ReaderController extends ChangeNotifier {
       .toList();
   
  
-  getFontStyle() => getGoogleFonts[fontFam](
-      TextStyle(color: Colors.black, fontSize: fontSize));
+  getFontStyle(Color color) => getGoogleFonts[fontFam](
+      TextStyle(color:color, fontSize: fontSize));
 
 }
+
+
+
+// enum ReaderOverlay{
+//   VolSpeed,
+//   Font,
+//   TopMenu,
+//   NewNote,
+//   NoteInfo,
+//   ChapterList,
+// }
+// //DefaultBottom,
+
+//   closeOverlay(){
+//      currentOverlay = null;
+//    }
+
+//    setOverlay(ReaderOverlay _newOverlay){
+//      currentOverlay = _newOverlay;
+//    }
+
+//     ReaderOverlay currentOverlay; 

@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:scroll_book/models/library_book_model.dart';
@@ -16,7 +16,7 @@ class LibState extends ChangeNotifier {
 
   LibState();
   LibraryBook get currentBook => _currentBook;
-  TextStyle get currentTextStyle =>getGoogleFonts[fontFam](TextStyle(fontSize: 16.0, color: Colors.black));
+ // TextStyle get currentTextStyle =>getGoogleFonts[fontFam](TextStyle(fontSize: 16.0, color: Colors.black));
   init(List<LibraryBook> userlibrary)  { 
     library=userlibrary;
     isInit=true;
@@ -27,7 +27,7 @@ class LibState extends ChangeNotifier {
  setBook(LibraryBook _newBook) async{
    // await flutterTts.speak(designerPreview);
    _currentBook = _newBook;
-    var chapterData = await Firestore.instance.collection('books').document('7sTQD2II1dpxWfSSUGfk').get();
+   //var chapterData = await Firestore.instance.collection('books').document('7sTQD2II1dpxWfSSUGfk').get();
  }
 
 }

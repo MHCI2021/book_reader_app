@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_book/pages/library/library_home.dart';
-import 'package:scroll_book/state/state.dart';
+
 
 //import 'package:scroll_book/utils/custom_expansion_tile.dart' as custom;
 
@@ -20,7 +20,6 @@ class _HomePageState extends State<HomePage> {
    final List<Widget> _children = [
         Container(color:Colors.grey),
         LibraryHome(),
-        Container(color:Colors.blue),    
     ];
 
   void onTabTapped(int index) {
@@ -46,10 +45,7 @@ class _HomePageState extends State<HomePage> {
            icon: new Icon(Icons.book),
            title: new Text('Library'),
          ),
-         BottomNavigationBarItem(
-           icon: Icon(Icons.person),
-           title: Text('Profile')
-         )
+        
         ]),
         body: SafeArea(
         top: false,
