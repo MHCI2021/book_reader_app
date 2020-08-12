@@ -10,8 +10,7 @@ import 'package:scroll_book/utils/fonts.dart';
 class ReaderController extends ChangeNotifier {
  bool isPlaying = false, isScrolling=false;
   String fontFam = 'Alegreya Sans';
-  double progress, fontSize = 16.0;
-  double volume = 50.0;
+  double progress, fontSize = 16.0, volume = 0.5, speed = 1.0;
   LibraryBook _currentBook;
   double chapterTime=300.0, currentTime=0.0;
   FlutterTts flutterTts;
@@ -23,14 +22,12 @@ class ReaderController extends ChangeNotifier {
   LibraryBook get currentBook => _currentBook;
   init({int sentenceStart=0})  async{ 
       textBlocks = _getTextBlocks(sentenceStart);
-     flutterTts = FlutterTts();
-     //await flutterTts.setSharedInstance(true);
+     flutterTts = FlutterTts();//await flutterTts.setSharedInstance(true);
      flutterTts.setCompletionHandler(() {
       print("Complete");
       if(isPlaying &&currentIndex<textBlocks.length-1 && !isScrolling){
         currentIndex+=1;
-        flutterTts.speak(textBlocks[currentIndex]);
-        //next();
+        flutterTts.speak(textBlocks[currentIndex]);//next();
         notifyListeners();
       }
      });
@@ -57,6 +54,14 @@ class ReaderController extends ChangeNotifier {
   setFontFam(String val){
     fontFam=val;
     notifyListeners();
+  }
+  setVolume(double _vol) async{
+    volume = _vol;
+    await flutterTts.setVolume(_vol);
+  }
+   setSpeed(double _speed)async{
+     speed= _speed;
+     await flutterTts.setSpeechRate(_speed);
   }
   play() {
     print("Play");
@@ -85,6 +90,7 @@ class ReaderController extends ChangeNotifier {
    _currentBook = _newBook;
    // var chapterData = await Firestore.instance.collection('books').document('7sTQD2II1dpxWfSSUGfk').get();
  }
+
   List<String> _splitIntoSentences() => designers
   //_currentBook.chapterText
       .replaceAll(".", ".&&")
@@ -94,7 +100,6 @@ class ReaderController extends ChangeNotifier {
       .map((e) => e.trim() + " ")
       .toList();
   
- 
   getFontStyle(Color color) => getGoogleFonts[fontFam](
       TextStyle(color:color, fontSize: fontSize));
 

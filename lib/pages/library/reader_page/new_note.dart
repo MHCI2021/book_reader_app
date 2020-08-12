@@ -20,7 +20,6 @@ class EditorPageState extends State<EditorPage> {
     // Here we must load the document and pass it to Zefyr controller.
     final document = _loadDocument();
     _controller = ZefyrController(document);
-    
     _focusNode = FocusNode();
     
   }

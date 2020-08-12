@@ -398,11 +398,26 @@ class _ReaderPageState extends State<ReaderPage> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("0.5x"),
-                      Text("0.75x"),
-                      Text("1.0x"),
-                      Text("1.5x"),
-                      Text("2.0x"),
+                      GestureDetector(child: Text("0.5x", style: readerController.speed==0.5?TextStyle(fontWeight:FontWeight.bold):null,), onTap: (){
+                        readerController.setSpeed(0.5);
+                        setState(() {});
+                      },),
+                      GestureDetector(child: Text("0.75x", style: readerController.speed==0.75?TextStyle(fontWeight:FontWeight.bold):null,),onTap: (){
+                         readerController.setSpeed(0.75);
+                         setState(() {});
+                      },),
+                      GestureDetector(child: Text("1.0x", style: readerController.speed==1.0?TextStyle(fontWeight:FontWeight.bold):null,),onTap: (){
+                         readerController.setSpeed(1.0);
+                         setState(() {});
+                      },),
+                      GestureDetector(child: Text("1.5x", style: readerController.speed==1.5?TextStyle(fontWeight:FontWeight.bold):null,),onTap: (){
+                         readerController.setSpeed(1.5);
+                         setState(() {});
+                      },),
+                      GestureDetector(child: Text("2.0x", style: readerController.speed==2.0?TextStyle(fontWeight:FontWeight.bold):null,),onTap: (){
+                         readerController.setSpeed(2.0);
+                         setState(() { });
+                      },),
                     ]),
               ),
               SizedBox(height: 20.0),
@@ -423,10 +438,10 @@ class _ReaderPageState extends State<ReaderPage> {
                             RoundSliderOverlayShape(overlayRadius: 28.0),
                       ),
                       child: Slider(
-                          max: 100.0,
+                          max: 1.0,
                           value: readerController.volume,
                           onChanged: (val) {
-                            readerController.volume = val;
+                            readerController.setVolume(val);
                             setState(() {});
                           }))),
             ],
