@@ -43,7 +43,14 @@ dependencies:
   #carousel_slider:
   #https://pub.dev/packages/flutter_tts
   flutter_tts:
+  zefyr:
+    git:
+      url: git://github.com/memspace/zefyr.git
+      path: packages/zefyr/
+      ref: master
+      commit: 9b032d8
 
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter

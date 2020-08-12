@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:scroll_book/models/library_book_model.dart';
 import 'package:scroll_book/state/app_state.dart';
+import 'package:scroll_book/state/state.dart';
 import 'package:scroll_book/utils/fonts.dart';
 
-enum ReaderOverlays{
+enum ReaderOverlay{
   VolSpeed,
   Font,
   TopMenu,
@@ -25,6 +26,7 @@ class ReaderController extends ChangeNotifier {
   double chapterTime=300.0, currentTime=0.0;
   FlutterTts flutterTts;
   List<String> textBlocks;
+  ReaderOverlay currentOverlay; 
   int currentIndex;
   ReaderController();
   
@@ -47,10 +49,17 @@ class ReaderController extends ChangeNotifier {
         print(word);
      });
   }
+  closeOverlay(){
+     currentOverlay = null;
+   }
+
+   setOverlay(ReaderOverlay _newOverlay){
+     currentOverlay = _newOverlay;
+   }
+
    List<String> _getTextBlocks(int sentenceStart) {
     List<String> blocks = [""];
     int i=0;
-   
     _splitIntoSentences().forEach((b){
       if(blocks.last.length<100)blocks.last+=b;
       else blocks.add(b);

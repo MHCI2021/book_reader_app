@@ -107,7 +107,6 @@ class _LibraryHomeState extends State<LibraryHome> {
     Navigator.of(context).push(homeToReaderRoute());
   }
 
-
 Route homeToReaderRoute() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => 

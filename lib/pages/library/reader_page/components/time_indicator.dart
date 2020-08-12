@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_book/state/service_locator.dart';
 import 'package:scroll_book/state/state.dart';
-
+//https://medium.com/flutter-community/flutter-sliders-demystified-4b3ea65879c
 class TimeBar extends StatefulWidget {
   final int currentTime, totalTime;
   final double width, height;
@@ -38,6 +38,7 @@ class _TimeBarState extends State<TimeBar> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                 
                Container(
                       width:double.infinity,
                       height: 20,
