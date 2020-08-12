@@ -31,18 +31,26 @@ dependencies:
   google_fonts:
   get_it:
   # Check that you have this dependency (added in the previous step)
-  firebase_core: ^0.4.0+9
-  # Add the dependency for the FlutterFire plugin for Google Analytics
-  firebase_analytics: ^5.0.2
+  #firebase_core: ^0.4.0+9
+  #firebase_analytics: ^5.0.2
+  #firebase_auth: ^0.14.0+5
+  #cloud_firestore: ^0.12.9+5
   flutter_svg:
+ # flutter_icons:
   # Add the dependencies for any other Firebase products you want to use in your app
   # For example, to use Firebase Authentication and Cloud Firestore
-  firebase_auth: ^0.14.0+5
-  cloud_firestore: ^0.12.9+5
+
   #carousel_slider:
   #https://pub.dev/packages/flutter_tts
   flutter_tts:
+  zefyr:
+    git:
+      url: git://github.com/memspace/zefyr.git
+      path: packages/zefyr/
+      ref: master
+      commit: 9b032d8
 
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -60,19 +68,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/icons/2x.png
-    - assets/icons/back.svg
-    - assets/icons/back15.svg
-    - assets/icons/library-inactive.svg
-    - assets/icons/library-active.svg
-    - assets/icons/bookstore-active.svg
-    - assets/icons/bookstore-inactive.svg
-    - assets/icons/forward15.svg
-    - assets/icons/pause.svg
-    - assets/icons/play.svg
-    - assets/icons/profile-active.svg
-    - assets/icons/profile-inactive.svg
-    - assets/icons/show_more.svg
+    - assets/icons/15-Seconds-Forward_Icon.png
+    - assets/icons/15-Seconds-Back_Icon.png
+    - assets/icons/Font_Icon.png
+    - assets/icons/Pause_Icon.png
+    - assets/icons/Play_Icon.png
+    - assets/icons/Back Arrow.png
     - assets/images/ruined.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,13 +1,13 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
+
+// import 'package:firebase_analytics/firebase_analytics.dart';
+// import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_book/pages/homepage.dart';
 import 'package:scroll_book/state/service_locator.dart';
 import 'package:scroll_book/state/state.dart';
 import 'package:scroll_book/utils/theme.dart';
-import 'package:scroll_book/utils/vector_painter.dart';
 
-Future<void> main() async {
+ main()  {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-var appState= locator<AppState>();
+//var appState= locator<AppState>();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: themeData,

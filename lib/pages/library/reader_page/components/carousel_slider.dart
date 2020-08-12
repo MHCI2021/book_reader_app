@@ -202,7 +202,8 @@ class CarouselSliderState extends State<CarouselSlider>
                   child: 
                   Padding(
                     padding: EdgeInsets.all(15.0),
-                    child: Text(widget.items[index], style: TextStyle(color:itemOffset.abs()<0.5?Colors.black:Colors.grey[700]),),
+                    child: Text(widget.items[index], style: 
+                    readerController.getFontStyle(itemOffset.abs()<0.5?Colors.black:Colors.grey[700]),),
                   )),
               ),
                   width: distortionValue * MediaQuery.of(context).size.width,
